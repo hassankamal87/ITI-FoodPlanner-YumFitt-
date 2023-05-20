@@ -23,4 +23,10 @@
     <string name="welcom">Welcome back! Youre just a tap away from something delicious</string>
     <string name="start">START COOKING!</string>
     <string name="resetPassword">I FORGOT MY PASSWORD</string>
+    <string name="reset">Password Reset</string>
+    <string name="welc">We\'ve all been there. Type in Your email and we \'ll send you a reset email.</string>
+    <string name="resetss">RESET</string>
+    <string name="foru">FOR YOU</string>
+    <string name="search">SEARCH</string>
+    <string name="fav">FAVOURITE</string>
 </resources>

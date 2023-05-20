@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1043790620346",
+    "project_id": "yumfit-8799",
+    "storage_bucket": "yumfit-8799.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1043790620346:android:902f01662b44d564430483",
+        "android_client_info": {
+          "package_name": "com.example.yumfit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1043790620346-bq8a0016l7btm6hnrnnba3mlnd6eedlj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yumfit",
+            "certificate_hash": "676af2d42bdf1c9c45c5fc6a4757245c07954533"
+          }
+        },
+        {
+          "client_id": "1043790620346-6vaus3ut05e13d54jopte6itfbqe4t0i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFUXlTUI8ORyDvsHndmDNRcidsgCGCoRg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1043790620346-6vaus3ut05e13d54jopte6itfbqe4t0i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

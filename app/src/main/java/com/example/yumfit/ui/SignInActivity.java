@@ -3,6 +3,7 @@ package com.example.yumfit.ui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +18,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -25,6 +25,7 @@ public class SignInActivity extends AppCompatActivity {
     Button logIn;
     ProgressBar progressBar;
     TextView resetTV;
+    Intent intent;
 
     private FirebaseAuth mAuth;
     @Override
@@ -34,6 +35,7 @@ public class SignInActivity extends AppCompatActivity {
 
 
         initialiseViews();
+        intent = new Intent();
         mAuth = FirebaseAuth.getInstance();
 
         logIn.setOnClickListener(v->{
@@ -72,17 +74,18 @@ public class SignInActivity extends AppCompatActivity {
 
 
         resetTV.setOnClickListener(v->{
-
+            intent.setClass(SignInActivity.this, PasswordReset.class);
+            startActivity(intent);
         });
     }
 
     private void initialiseViews(){
-        emailEditText = findViewById(R.id.emaileditTextInSignIn);
+        emailEditText = findViewById(R.id.emailInPasswordReset);
         passwordEditText = findViewById(R.id.passwordEditTextinSignIn);
-        logIn = findViewById(R.id.startBtn);
+        logIn = findViewById(R.id.resetBtn);
         resetTV = findViewById(R.id.resetTV);
         resetTV.setPaintFlags(resetTV.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        progressBar = findViewById(R.id.progressBarInSignIn);
+        progressBar = findViewById(R.id.progressBarInPasswordReset);
         progressBar.setVisibility(View.GONE);
     }
 }

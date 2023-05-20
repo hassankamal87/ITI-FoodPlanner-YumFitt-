@@ -3,7 +3,6 @@ package com.example.yumfit.ui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -65,11 +64,8 @@ public class SignupActivity extends AppCompatActivity {
                                 }
                             }
                         });
-
             }
         });
-
-
     }
 
     private void initialiseViews(){
@@ -77,17 +73,10 @@ public class SignupActivity extends AppCompatActivity {
         emailET = findViewById(R.id.emailEditText);
         passwordET = findViewById(R.id.passwordEditTextinSignIn);
         confirmPasswordET = findViewById(R.id.confirmPasswordEditText);
-        nextBtn = findViewById(R.id.startBtn);
-        progressBar = findViewById(R.id.progressBarInSignIn);
+        nextBtn = findViewById(R.id.resetBtn);
+        progressBar = findViewById(R.id.progressBarInPasswordReset);
         progressBar.setVisibility(View.GONE);
     }
 
-    private void disableButton(){
-        nextBtn.setEnabled(false);
-        nextBtn.setBackgroundColor(Color.GRAY);
-    }
-    private void enableButton(){
-        nextBtn.setEnabled(true);
-        nextBtn.setBackgroundColor(Color.BLACK);
-    }
+
 }

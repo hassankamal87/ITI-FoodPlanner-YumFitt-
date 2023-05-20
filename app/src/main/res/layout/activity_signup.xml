@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/signin"
+        android:id="@+id/passwordReset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -21,15 +21,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/welcom"
+        android:id="@+id/welcominPasswordReset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/titlesignup"
         android:textColor="#373737"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/signin"
-        app:layout_constraintTop_toBottomOf="@+id/signin" />
+        app:layout_constraintStart_toStartOf="@+id/passwordReset"
+        app:layout_constraintTop_toBottomOf="@+id/passwordReset" />
 
     <EditText
         android:id="@+id/nameEditText"
@@ -44,8 +44,8 @@
         android:minHeight="48dp"
         android:textColor="#040303"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/welcom"
-        app:layout_constraintTop_toBottomOf="@+id/welcom" />
+        app:layout_constraintStart_toStartOf="@+id/welcominPasswordReset"
+        app:layout_constraintTop_toBottomOf="@+id/welcominPasswordReset" />
 
     <EditText
         android:id="@+id/emailEditText"
@@ -61,7 +61,7 @@
         android:textColor="#040303"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/welcom"
+        app:layout_constraintStart_toStartOf="@+id/welcominPasswordReset"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
 
     <EditText
@@ -79,7 +79,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/welcom"
+        app:layout_constraintStart_toStartOf="@+id/welcominPasswordReset"
         app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
 
     <EditText
@@ -97,11 +97,11 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/welcom"
+        app:layout_constraintStart_toStartOf="@+id/welcominPasswordReset"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditTextinSignIn" />
 
     <Button
-        android:id="@+id/startBtn"
+        android:id="@+id/resetBtn"
         style="@style/myButton"
         android:layout_width="273dp"
         android:layout_height="55dp"
@@ -118,7 +118,7 @@
         app:layout_constraintTop_toBottomOf="@+id/confirmPasswordEditText" />
 
     <ProgressBar
-        android:id="@+id/progressBarInSignIn"
+        android:id="@+id/progressBarInPasswordReset"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
