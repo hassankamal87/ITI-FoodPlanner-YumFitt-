@@ -19,4 +19,8 @@
     <string name="password">Password</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="next">Next</string>
+    <string name="signIn">Sign In</string>
+    <string name="welcom">Welcome back! Youre just a tap away from something delicious</string>
+    <string name="start">START COOKING!</string>
+    <string name="resetPassword">I FORGOT MY PASSWORD</string>
 </resources>

@@ -40,7 +40,8 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         logInTV.setOnClickListener(v->{
-
+            intent.setClass(RegisterActivity.this, SignInActivity.class);
+            startActivity(intent);
         });
 
 

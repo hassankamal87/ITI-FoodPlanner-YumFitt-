@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SignupActivity">
-
+    tools:context=".ui.SignInActivity">
 
     <TextView
         android:id="@+id/signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="76dp"
-        android:text="@string/signup"
+        android:layout_marginTop="64dp"
+        android:text="@string/signIn"
         android:textColor="#050505"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -22,37 +21,21 @@
 
     <TextView
         android:id="@+id/welcom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="355dp"
+        android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        android:text="@string/titlesignup"
+        android:text="@string/welcom"
         android:textColor="#373737"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/signin"
         app:layout_constraintTop_toBottomOf="@+id/signin" />
 
     <EditText
-        android:id="@+id/nameEditText"
+        android:id="@+id/emaileditTextInSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:hint="@string/name"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColor="#040303"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/welcom"
-        app:layout_constraintTop_toBottomOf="@+id/welcom" />
-
-    <EditText
-        android:id="@+id/emailEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="15dp"
         android:ems="10"
         android:hint="@string/email"
@@ -61,8 +44,9 @@
         android:textColor="#040303"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.941"
         app:layout_constraintStart_toStartOf="@+id/welcom"
-        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/welcom" />
 
     <EditText
         android:id="@+id/passwordEditTextinSignIn"
@@ -80,25 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/welcom"
-        app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
-
-    <EditText
-        android:id="@+id/confirmPasswordEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
-        android:ems="10"
-        android:hint="@string/confirmPassword"
-        android:inputType="textPersonName|textPassword"
-        android:minHeight="48dp"
-        android:textColor="#040303"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/welcom"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEditTextinSignIn" />
+        app:layout_constraintTop_toBottomOf="@+id/emaileditTextInSignIn" />
 
     <Button
         android:id="@+id/startBtn"
@@ -106,26 +72,35 @@
         android:layout_width="273dp"
         android:layout_height="55dp"
         android:layout_marginStart="68dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="68dp"
         android:backgroundTint="#070707"
         android:elevation="40dp"
-        android:text="@string/next"
+        android:text="@string/start"
         android:textColor="#FAF9F9"
         android:textSize="16sp"
         android:textStyle="bold"
         app:iconTint="#0E0E0E"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditTextinSignIn" />
 
     <ProgressBar
         android:id="@+id/progressBarInSignIn"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        app:layout_constraintEnd_toEndOf="@+id/confirmPasswordEditText"
+        android:layout_marginTop="68dp"
+        app:layout_constraintEnd_toEndOf="@+id/passwordEditTextinSignIn"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/confirmPasswordEditText"
-        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordEditText" />
+        app:layout_constraintStart_toStartOf="@+id/passwordEditTextinSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditTextinSignIn" />
+
+    <TextView
+        android:id="@+id/resetTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/resetPassword"
+        app:layout_constraintEnd_toEndOf="@+id/passwordEditTextinSignIn"
+        app:layout_constraintStart_toStartOf="@+id/passwordEditTextinSignIn"
+        tools:layout_editor_absoluteY="356dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

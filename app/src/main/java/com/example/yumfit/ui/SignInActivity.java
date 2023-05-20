@@ -3,12 +3,13 @@ package com.example.yumfit.ui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.yumfit.R;
@@ -16,50 +17,50 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
-    EditText nameET, emailET, passwordET, confirmPasswordET;
-    Button nextBtn;
+    EditText emailEditText, passwordEditText;
+    Button logIn;
     ProgressBar progressBar;
+    TextView resetTV;
 
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_sign_in);
+
 
         initialiseViews();
         mAuth = FirebaseAuth.getInstance();
 
-        nextBtn.setOnClickListener(v->{
-
-            if(nameET.getText().toString().equals("") ||emailET.getText().toString().equals("") ||passwordET.getText().toString().equals("") ||confirmPasswordET.getText().toString().equals("") ){
+        logIn.setOnClickListener(v->{
+            if(emailEditText.getText().toString().equals("") || passwordEditText.getText().toString().equals("")){
                 Toast.makeText(this, "all fields are required", Toast.LENGTH_SHORT).show();
-            }else if(!passwordET.getText().toString().equals(confirmPasswordET.getText().toString())){
-                Toast.makeText(this, "password not Match Confirm Password", Toast.LENGTH_SHORT).show();
             }else{
-                nextBtn.setVisibility(View.GONE);
+                logIn.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
-                String email, password;
-                email = String.valueOf(emailET.getText());
-                password = String.valueOf(passwordET.getText());
+                String email = String.valueOf(emailEditText.getText());
+                String password = String.valueOf(passwordEditText.getText());
 
-                mAuth.createUserWithEmailAndPassword(email, password)
+                mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(SignupActivity.this, "Authentication Successful", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignInActivity.this, "Authentication Success.",
+                                            Toast.LENGTH_SHORT).show();
 
                                     // Sign in success, update UI with the signed-in user's information
                                     //FirebaseUser user = mAuth.getCurrentUser();
                                     //updateUI(user);
                                 } else {
-                                    nextBtn.setVisibility(View.VISIBLE);
+                                    logIn.setVisibility(View.VISIBLE);
                                     // If sign in fails, display a message to the user.
-                                    Toast.makeText(SignupActivity.this, "Authentication failed.",
+                                    Toast.makeText(SignInActivity.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
                                     //updateUI(null);
                                 }
@@ -70,24 +71,18 @@ public class SignupActivity extends AppCompatActivity {
         });
 
 
+        resetTV.setOnClickListener(v->{
+
+        });
     }
 
     private void initialiseViews(){
-        nameET = findViewById(R.id.nameEditText);
-        emailET = findViewById(R.id.emailEditText);
-        passwordET = findViewById(R.id.passwordEditTextinSignIn);
-        confirmPasswordET = findViewById(R.id.confirmPasswordEditText);
-        nextBtn = findViewById(R.id.startBtn);
+        emailEditText = findViewById(R.id.emaileditTextInSignIn);
+        passwordEditText = findViewById(R.id.passwordEditTextinSignIn);
+        logIn = findViewById(R.id.startBtn);
+        resetTV = findViewById(R.id.resetTV);
+        resetTV.setPaintFlags(resetTV.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         progressBar = findViewById(R.id.progressBarInSignIn);
         progressBar.setVisibility(View.GONE);
-    }
-
-    private void disableButton(){
-        nextBtn.setEnabled(false);
-        nextBtn.setBackgroundColor(Color.GRAY);
-    }
-    private void enableButton(){
-        nextBtn.setEnabled(true);
-        nextBtn.setBackgroundColor(Color.BLACK);
     }
 }
