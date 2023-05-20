@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">YumFit</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="yumfit">YumFit</string>
+    <string name="spl">Shop Ingredients</string>
+    <string name="ss">For Any Recipe</string>
+    <string name="y">Yum Fit</string>
+    <string name="signwithmail">SIGN UP WITH EMAIL</string>
+    <string name="facebook">FaceBook</string>
+    <string name="google">Google</string>
+    <string name="haveacoount">Already have an account?</string>
+    <string name="login">Log In</string>
+    <string name="signup">Sign Up</string>
+    <string name="titlesignup">Save delicious recipes and get personalized content.</string>
+    <string name="displayName" />
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="next">Next</string>
+</resources>
