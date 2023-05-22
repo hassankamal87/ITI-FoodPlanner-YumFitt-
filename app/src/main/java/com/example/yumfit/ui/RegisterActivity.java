@@ -107,6 +107,9 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+
+                            intent.setClass(RegisterActivity.this,Home2Activity.class);
+                            startActivity(intent);
                             // Sign in success, update UI with the signed-in user's information
                             Log.i("hassankamal", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();

@@ -41,10 +41,17 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+
+    //design
+    implementation 'com.google.android.material:material:1.9.0'
+
     //lottie
     implementation 'com.airbnb.android:lottie:6.0.0'
 
     //firebase
     implementation 'com.google.android.gms:play-services-auth:20.5.0'
     implementation platform('com.google.firebase:firebase-bom:32.0.0')
+
+    //circularImage
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

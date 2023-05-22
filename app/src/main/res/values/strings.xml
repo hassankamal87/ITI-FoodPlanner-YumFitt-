@@ -29,4 +29,10 @@
     <string name="foru">FOR YOU</string>
     <string name="search">SEARCH</string>
     <string name="fav">FAVOURITE</string>
+    <string name="you">YOU</string>
+    <string name="fab" />
+    <string name="fabb">fab</string>
+    <string name="nameofMeal">Chinees Takoo</string>
+    <string name="time">15min</string>
+    <string name="dailyinspiration">Daily Inspiration</string>
 </resources>

@@ -55,7 +55,9 @@ public class SignInActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(SignInActivity.this, "Authentication Success.",
                                             Toast.LENGTH_SHORT).show();
-
+                                    intent.setClass(SignInActivity.this,Home2Activity.class);
+                                    startActivity(intent);
+                                    finish();
                                     // Sign in success, update UI with the signed-in user's information
                                     //FirebaseUser user = mAuth.getCurrentUser();
                                     //updateUI(user);
