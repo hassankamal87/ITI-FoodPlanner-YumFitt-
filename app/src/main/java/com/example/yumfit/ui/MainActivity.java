@@ -8,9 +8,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.yumfit.R;
+import com.example.yumfit.authentication.register.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.yumfit.Fragments;
+package com.example.yumfit.home.view;
 
 import android.os.Bundle;
 

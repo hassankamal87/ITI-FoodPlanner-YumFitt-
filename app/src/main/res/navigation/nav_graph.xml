@@ -7,27 +7,44 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.yumfit.Fragments.HomeFragment"
+        android:name="com.example.yumfit.home.view.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.yumfit.Fragments.SearchFragment"
+        android:name="com.example.yumfit.search.view.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mealPlanFragment"
-        android:name="com.example.yumfit.Fragments.MealPlanFragment"
+        android:name="com.example.yumfit.plan.view.MealPlanFragment"
         android:label="Meal Plan"
         tools:layout="@layout/fragment_meal_plan" />
     <fragment
         android:id="@+id/favouriteFragment"
-        android:name="com.example.yumfit.Fragments.FavouriteFragment"
+        android:name="com.example.yumfit.favourite.view.FavouriteFragment"
         android:label="Favourite Meals"
-        tools:layout="@layout/fragment_favourite" />
+        tools:layout="@layout/fragment_favourite" >
+        <action
+            android:id="@+id/action_favouriteFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.yumfit.Fragments.ProfileFragment"
+        android:name="com.example.yumfit.profile.view.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.yumfit.details.view.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" />
 </navigation>

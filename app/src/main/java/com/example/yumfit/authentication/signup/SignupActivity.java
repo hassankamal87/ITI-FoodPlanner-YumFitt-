@@ -1,4 +1,4 @@
-package com.example.yumfit.ui;
+package com.example.yumfit.authentication.signup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.yumfit.R;
+import com.example.yumfit.ui.Home2Activity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -54,7 +55,7 @@ public class SignupActivity extends AppCompatActivity {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
                                     Toast.makeText(SignupActivity.this, "Authentication Successful", Toast.LENGTH_SHORT).show();
-                                    intent.setClass(SignupActivity.this,Home2Activity.class);
+                                    intent.setClass(SignupActivity.this, Home2Activity.class);
                                     startActivity(intent);
                                     // Sign in success, update UI with the signed-in user's information
                                     //FirebaseUser user = mAuth.getCurrentUser();
@@ -71,6 +72,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void initialiseViews(){
         nameET = findViewById(R.id.nameEditText);

@@ -22,28 +22,28 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.PasswordReset"
+            android:name=".authentication.resetpassword.PasswordReset"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.SignInActivity"
+            android:name=".authentication.signin.SignInActivity"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.SignupActivity"
+            android:name=".authentication.signup.SignupActivity"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.RegisterActivity"
+            android:name=".authentication.register.RegisterActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3.Light.NoActionBar" >
             <meta-data

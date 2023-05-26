@@ -1,4 +1,4 @@
-package com.example.yumfit.ui;
+package com.example.yumfit.authentication.resetpassword;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.yumfit.R;
+import com.example.yumfit.authentication.signin.SignInActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,7 +52,7 @@ public class PasswordReset extends AppCompatActivity {
                         }else{
                             progressBar.setVisibility(View.GONE);
                             resetBtn.setVisibility(View.VISIBLE);
-                            Toast.makeText(PasswordReset.this, "please enter valid email", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PasswordReset.this, "this email is not exist", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

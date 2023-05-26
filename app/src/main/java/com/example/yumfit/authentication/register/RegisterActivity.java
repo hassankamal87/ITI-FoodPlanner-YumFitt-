@@ -1,4 +1,4 @@
-package com.example.yumfit.ui;
+package com.example.yumfit.authentication.register;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,9 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.yumfit.R;
+import com.example.yumfit.ui.Home2Activity;
+import com.example.yumfit.authentication.signin.SignInActivity;
+import com.example.yumfit.authentication.signup.SignupActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -108,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            intent.setClass(RegisterActivity.this,Home2Activity.class);
+                            intent.setClass(RegisterActivity.this, Home2Activity.class);
                             startActivity(intent);
                             // Sign in success, update UI with the signed-in user's information
                             Log.i("hassankamal", "signInWithCredential:success");
@@ -121,5 +123,17 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            intent.setClass(RegisterActivity.this,Home2Activity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

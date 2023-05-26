@@ -35,4 +35,17 @@
     <string name="nameofMeal">Chinees Takoo</string>
     <string name="time">15min</string>
     <string name="dailyinspiration">Daily Inspiration</string>
+    <string name="calender">Calender</string>
+    <string name="china">China</string>
+    <string name="hassan_kamal">Hassan kamal</string>
+    <string name="logout">Log Out</string>
+    <string name="emailss">hassankamal87992010@gmail.com</string>
+    <string name="search_recipes">Search Recipes</string>
+    <string name="country">Country</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="category">Category</string>
+    <string name="recipe">RECIPE</string>
+    <string name="by">by</string>
+    <string name="desc">name of this meal i love asian-style marinades because they call for aggresive flavitings. garlic of course ginger usually sot fot that salty ummami. maybe some fish sauce for a litel func some jhassan nakam kamma ddjdk sjas black afgano ecause this is part of my cultue delicious.</string>
+    <string name="add_to_plan">ADD TO PLAN</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.yumfit.ui;
+package com.example.yumfit.authentication.signin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.yumfit.R;
+import com.example.yumfit.authentication.resetpassword.PasswordReset;
+import com.example.yumfit.ui.Home2Activity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -55,7 +57,7 @@ public class SignInActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(SignInActivity.this, "Authentication Success.",
                                             Toast.LENGTH_SHORT).show();
-                                    intent.setClass(SignInActivity.this,Home2Activity.class);
+                                    intent.setClass(SignInActivity.this, Home2Activity.class);
                                     startActivity(intent);
                                     finish();
                                     // Sign in success, update UI with the signed-in user's information
@@ -80,6 +82,8 @@ public class SignInActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
+
 
     private void initialiseViews(){
         emailEditText = findViewById(R.id.emailInPasswordReset);

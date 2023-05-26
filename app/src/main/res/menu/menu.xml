@@ -12,10 +12,6 @@
         android:title="@string/search" />
 
     <item
-        android:id="@+id/hidden"
-        android:title="" />
-
-    <item
         android:id="@+id/favouriteFragment"
         android:icon="@drawable/favourite"
         android:title="@string/fav" />
