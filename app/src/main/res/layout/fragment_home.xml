@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".home.view.HomeFragment">
+    tools:context=".home.view.HomeViewFragment">
 
     <TextView
         android:id="@+id/dailyTV"
@@ -25,7 +25,7 @@
         android:id="@+id/cardMeal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="30dp"
+        app:cardElevation="20dp"
         app:cardCornerRadius="40dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +61,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/mealImg" />
 
             <TextView
-                android:id="@+id/counteryTextView"
+                android:id="@+id/countryTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -75,7 +75,7 @@
 
 
             <ImageView
-                android:id="@+id/saveBtn"
+                android:id="@+id/addToFavouriteBtn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="30dp"
@@ -105,7 +105,7 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/countryRecyclerView"
+                android:id="@+id/countriesRecyclerView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -122,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/countryRecyclerView"
+                app:layout_constraintTop_toBottomOf="@id/countriesRecyclerView"
                 app:layout_goneMarginTop="20dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:orientation="horizontal"

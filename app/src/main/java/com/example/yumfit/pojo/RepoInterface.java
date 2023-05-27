@@ -29,11 +29,11 @@ public interface RepoInterface {
     void getMealsByCountry(String country, NetworkDelegate networkDelegate);
 
     //db
-    void insertMeal(Meal meal);
+    void insertMealToFavourite(Meal meal);
 
-    void deleteMeal(Meal meal);
+    void deleteMealFromFavourite(Meal meal);
 
-    void deleteAllMeals() ;
+    void deleteAllFavouriteMeals();
 
-    LiveData<List<Meal>> getAllMeals();
+    LiveData<List<Meal>> getAllFavouriteMeals();
 }

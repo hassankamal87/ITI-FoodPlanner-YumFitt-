@@ -77,22 +77,22 @@ public class Repo implements RepoInterface {
     }
 
     @Override
-    public void insertMeal(Meal meal) {
+    public void insertMealToFavourite(Meal meal) {
         localSource.insertMeal(meal);
     }
 
     @Override
-    public void deleteMeal(Meal meal) {
+    public void deleteMealFromFavourite(Meal meal) {
         localSource.deleteMeal(meal);
     }
 
     @Override
-    public void deleteAllMeals() {
+    public void deleteAllFavouriteMeals() {
         localSource.deleteAllMeals();
     }
 
     @Override
-    public LiveData<List<Meal>> getAllMeals() {
+    public LiveData<List<Meal>> getAllFavouriteMeals() {
         return localSource.getAllMeals();
     }
 }

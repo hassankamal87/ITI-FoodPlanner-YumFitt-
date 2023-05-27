@@ -3,17 +3,18 @@ package com.example.yumfit.pojo;
 import java.util.List;
 
 public class MealResponse {
-    private List<Meal> Meals;
+
+    private List<Meal> meals;
 
     public MealResponse(List<Meal> meals) {
-        Meals = meals;
+        this.meals = meals;
     }
 
     public List<Meal> getMeals() {
-        return Meals;
+        return meals;
     }
 
     public void setMeals(List<Meal> meals) {
-        Meals = meals;
+        this.meals = meals;
     }
 }
