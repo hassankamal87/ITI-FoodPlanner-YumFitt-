@@ -12,11 +12,11 @@ public class IngredientResponse {
         this.Ingredients = Ingredients;
     }
 
-    public List<Ingredient> getMeals() {
+    public List<Ingredient> getIngredient() {
         return Ingredients;
     }
 
-    public void setMeals(List<Ingredient> meals) {
+    public void setIngredient(List<Ingredient> meals) {
         this.Ingredients = meals;
     }
 }

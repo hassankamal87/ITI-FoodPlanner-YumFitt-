@@ -18,6 +18,9 @@ public interface MealsDao {
     @Delete
     public void deleteMeal(Meal meal);
 
+    @Query("DELETE FROM meals_table")
+    public void deleteAllMeals() ;
+
     @Query("SELECT * FROM meals_table")
     LiveData<List<Meal>> getAllMeals();
 }

@@ -13,11 +13,11 @@ public class CountryResponse {
         this.countries = meals;
     }
 
-    public List<Country> getMeals() {
+    public List<Country> getCountries() {
         return countries;
     }
 
-    public void setMeals(List<Country> meals) {
+    public void setCountries(List<Country> meals) {
         this.countries = meals;
     }
 }

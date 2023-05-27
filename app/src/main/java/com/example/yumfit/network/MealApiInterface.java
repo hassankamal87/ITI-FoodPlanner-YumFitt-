@@ -33,7 +33,7 @@ public interface MealApiInterface {
     Call<CountryResponse> getAllCountries();
 
     @GET("list.php?i=list")
-    Call<List<IngredientResponse>> getAllIngredient();
+    Call<IngredientResponse> getAllIngredient();
 
     @GET("filter.php")//this return list of strMeal and strMealThumb and idMeal just
     Call<MealResponse> getMealsByIngredient(@Query("i") String ingredient);
