@@ -12,7 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Home2Activity extends AppCompatActivity {
 
-    BottomNavigationView bottomNavigationView;
+    public BottomNavigationView bottomNavigationView;
     NavController navController;
 
     @Override

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="408dp"
+    android:layout_width="400dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardMeal"
-    android:elevation="30dp"
     app:cardCornerRadius="40dp"
     app:cardUseCompatPadding="true"
+    app:cardElevation="5dp"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/dailyTV">
 
@@ -30,29 +30,20 @@
 
         <TextView
             android:id="@+id/mealName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:maxLines="2"
+            android:ellipsize="end"
             android:text="@string/nameofMeal"
             android:textColor="#020202"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mealImg" />
+            app:layout_constraintEnd_toStartOf="@id/addToFavouriteBtn"
+            app:layout_constraintTop_toBottomOf="@+id/mealImg"
 
-        <TextView
-            android:id="@+id/countryTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="#00090707"
-            android:paddingBottom="15dp"
-            android:text="@string/china"
-            android:textColor="#272727"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@id/mealName"
-            app:layout_constraintTop_toBottomOf="@id/mealName" />
-
+            />
 
         <ImageView
             android:id="@+id/addToFavouriteBtn"

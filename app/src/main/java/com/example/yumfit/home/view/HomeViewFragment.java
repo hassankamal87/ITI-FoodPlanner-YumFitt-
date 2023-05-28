@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.yumfit.R;
 import com.example.yumfit.db.ConcreteLocalSource;
@@ -27,18 +30,17 @@ import com.example.yumfit.pojo.Meal;
 import com.example.yumfit.pojo.Repo;
 import com.example.yumfit.pojo.RepoInterface;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeViewFragment extends Fragment implements HomeViewInterface {
+public class HomeViewFragment extends Fragment implements HomeViewInterface, OnClickInterface {
 
-
-    ImageView dailyMealImageView;
-    TextView dailyMealNameTextView;
-    TextView dailyMealCountryTextView;
-    ImageView dailyMealAddToFavouriteBtn;
-    RecyclerView categoriesRecyclerView, countriesRecyclerView;
-
+    RecyclerView dailyRecyclerView, countryRecyclerView, categoryRecyclerView;
+    HomePresenterInterface presenter;
+    DailyRecyclerAdapter dailyAdapter;
+    CountryRecyclerAdapter countryAdapter;
+    CategoryRecyclerAdapter categoryAdapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,56 +51,100 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home, container, false);
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeViews(view);
-
         RemoteSource remoteSource = ClientService.getInstance(view.getContext());
         LocalSource localSource = ConcreteLocalSource.getInstance(view.getContext());
         RepoInterface repo = Repo.getInstance(remoteSource, localSource);
-        HomePresenterInterface presenter = new HomePresenter(repo, this);
+        presenter = new HomePresenter(repo, this);
+
+        presenter.getRandomMeal();
+        presenter.getAllCountries();
+        presenter.getAllCategories();
 
     }
 
     private void initializeViews(View view) {
-        dailyMealImageView = view.findViewById(R.id.mealImg);
-        dailyMealNameTextView = view.findViewById(R.id.mealName);
-        dailyMealCountryTextView = view.findViewById(R.id.countryTextView);
-        dailyMealAddToFavouriteBtn = view.findViewById(R.id.addToFavouriteBtn);
-        categoriesRecyclerView = view.findViewById(R.id.categoriesRecyclerView);
-        countriesRecyclerView = view.findViewById(R.id.countriesRecyclerView);
+        dailyRecyclerView = view.findViewById(R.id.dailyInspirationRecycler);
+        countryRecyclerView = view.findViewById(R.id.countriesRecyclerView);
+        categoryRecyclerView = view.findViewById(R.id.categoriesRecyclerView);
+        dailyAdapter = new DailyRecyclerAdapter(view.getContext(),this);
+        countryAdapter = new CountryRecyclerAdapter(view.getContext(), this);
+        categoryAdapter = new CategoryRecyclerAdapter(view.getContext(), this);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
+        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+
+        dailyRecyclerView.setAdapter(dailyAdapter);
+        //dailyRecyclerView.setLayoutManager(linearLayoutManager);
+
+        countryRecyclerView.setAdapter(countryAdapter);
+        //countryRecyclerView.setLayoutManager(linearLayoutManager);
+
+        categoryRecyclerView.setAdapter(categoryAdapter);
+        //categoryRecyclerView.setLayoutManager(linearLayoutManager);
     }
 
     @Override
     public void setDailyInspirationData(List<Meal> meals) {
-        //what happen when get data from remote
-    }
-
-    @Override
-    public void addMealToFavouriteList(Meal meal) {
-
+        dailyAdapter.setList((ArrayList<Meal>) meals);
+        dailyAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void setListToCategoriesAdapter(List<Category> categories) {
-
-    }
-
-    @Override
-    public void setListToIngredientAdapter(List<Ingredient> ingredients) {
-
+        categoryAdapter.setList((ArrayList<Category>) categories);
+        categoryAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void setListToCountriesAdapter(List<Country> countries) {
-
+        countryAdapter.setList((ArrayList<Country>) countries);
+        countryAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onFailureResult(String message) {
+        Toast.makeText(dailyRecyclerView.getContext(), "error while : "+ message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSaveBtnClick(Meal meal) {
+        presenter.insertMeal(meal);
+    }
+
+    @Override
+    public void onDailyInspirationItemClicked(Meal meal) {
+        //here we need to navigate to details screen
+
+        Toast.makeText(dailyRecyclerView.getContext(), meal.getStrMeal()+ " clicked", Toast.LENGTH_SHORT).show();
+        HomeViewFragmentDirections.ActionHomeFragmentToDetailsFragment action =
+                HomeViewFragmentDirections.actionHomeFragmentToDetailsFragment(meal.getIdMeal());
+        Navigation.findNavController(getView()).navigate(action);
+    }
+
+    @Override
+    public void onCountryItemClicked(Country country) {
+        //here we need to navigate to country details screen
+        Toast.makeText(dailyRecyclerView.getContext(), country.getStrArea()+ " clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCategoryItemClicked(Category category) {
+        //here we need to navigate to country details screen
+        Toast.makeText(dailyRecyclerView.getContext(), category.getStrCategory()+ " clicked", Toast.LENGTH_SHORT).show();
 
     }
+
 }

@@ -1,12 +1,17 @@
 package com.example.yumfit.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "meals_table")
 @SuppressWarnings("ALL")
-public class Meal {
+public class Meal implements Parcelable {
     @PrimaryKey
     @NonNull
     private String idMeal;
@@ -459,5 +464,15 @@ public class Meal {
 
     public void setStrMeasure20(String strMeasure20) {
         this.strMeasure20 = strMeasure20;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+
     }
 }

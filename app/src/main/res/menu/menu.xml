@@ -16,6 +16,10 @@
         android:icon="@drawable/favourite"
         android:title="@string/fav" />
     <item
+        android:id="@+id/mealPlanFragment"
+        android:icon="@drawable/calender"
+        android:title="@string/calender" />
+    <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/person"
         android:title="@string/you" />

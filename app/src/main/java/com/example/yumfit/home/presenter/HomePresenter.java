@@ -58,7 +58,7 @@ public class HomePresenter implements NetworkDelegate, HomePresenterInterface {
 
     @Override
     public void onSuccessResultIngredient(List<Ingredient> ingredients) {
-        homeView.setListToIngredientAdapter(ingredients);
+
     }
 
     @Override

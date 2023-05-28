@@ -9,9 +9,7 @@ import java.util.List;
 
 public interface HomeViewInterface {
     void setDailyInspirationData(List<Meal> meals);
-    void addMealToFavouriteList(Meal meal);
     void setListToCategoriesAdapter(List<Category> categories);
-    void setListToIngredientAdapter(List<Ingredient> ingredients);
     void setListToCountriesAdapter(List<Country> countries);
     void onFailureResult(String message);
 }

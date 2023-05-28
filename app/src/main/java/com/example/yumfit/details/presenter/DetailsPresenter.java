@@ -22,6 +22,7 @@ public class DetailsPresenter implements NetworkDelegate, DetailsPresenterInterf
     @Override
     public void getMealById(String id) {
         repo.getMealById(id,this);
+
     }
 
     @Override
