@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_commonMeals"
+            app:destination="@id/commonMeals" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -42,5 +45,17 @@
         <argument
             android:name="id"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/commonMeals"
+        android:name="com.example.yumfit.commonmeals.view.CommonMealsFragment"
+        android:label="@string/let_s_cook_it"
+        tools:layout="@layout/fragment_common_meals" >
+        <argument
+            android:name="meals"
+            app:argType="com.example.yumfit.pojo.MealResponse" />
+        <action
+            android:id="@+id/action_commonMeals_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
 </navigation>

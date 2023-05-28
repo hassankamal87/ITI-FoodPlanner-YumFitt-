@@ -172,7 +172,7 @@ public class ClientService implements RemoteSource {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
                 Log.d(TAG, "onResponse: done to get Meals by Ingredient and size equal "+ response.body().getMeals().size());
-                networkDelegate.onSuccessResultMeal(response.body().getMeals());
+                networkDelegate.onSuccessFilter(response.body());
             }
 
             @Override
@@ -189,7 +189,7 @@ public class ClientService implements RemoteSource {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
                 Log.d(TAG, "onResponse: done to get meals by Category and size equal "+ response.body().getMeals().size());
-                networkDelegate.onSuccessResultMeal(response.body().getMeals());
+                networkDelegate.onSuccessFilter(response.body());
             }
 
             @Override
@@ -206,7 +206,7 @@ public class ClientService implements RemoteSource {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
                 Log.d(TAG, "onResponse: done to get Meals By Countries and size equal "+ response.body().getMeals().size());
-                networkDelegate.onSuccessResultMeal(response.body().getMeals());
+                networkDelegate.onSuccessFilter(response.body());
             }
 
             @Override

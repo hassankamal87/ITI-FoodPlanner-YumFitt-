@@ -56,6 +56,7 @@
     <string name="boneless_chicken_breasts">Boneless Chicken Breasts</string>
     <string name="let_s_cook_it">Let\'s Cook It.</string>
     <string name="ingredient">Ingredients.</string>
+    <string name="tasty_treats_await">Tasty Treats Await!</string>
 
     <string-array name="flags">
         <item>https://www.worldometers.info/img/flags/us-flag.gif</item>

@@ -6,6 +6,7 @@ import com.example.yumfit.pojo.Category;
 import com.example.yumfit.pojo.Country;
 import com.example.yumfit.pojo.Ingredient;
 import com.example.yumfit.pojo.Meal;
+import com.example.yumfit.pojo.MealResponse;
 import com.example.yumfit.pojo.RepoInterface;
 
 import java.util.List;
@@ -41,14 +42,30 @@ public class HomePresenter implements NetworkDelegate, HomePresenterInterface {
     }
 
     @Override
+    public void getMealsByCategory(String category) {
+        repo.getMealsByCategory(category, this);
+    }
+
+    @Override
+    public void getMealsByCountry(String country) {
+        repo.getMealsByCountry(country, this);
+    }
+
+    @Override
     public void insertMeal(Meal meal) {
         repo.insertMealToFavourite(meal);
     }
+
 
     //Delegate
     @Override
     public void onSuccessResultMeal(List<Meal> meals) {
         homeView.setDailyInspirationData(meals);
+    }
+
+    @Override
+    public void onSuccessFilter(MealResponse meals) {
+        homeView.onSuccessToFilter(meals);
     }
 
     @Override

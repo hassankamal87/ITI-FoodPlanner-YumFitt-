@@ -5,6 +5,7 @@ import com.example.yumfit.pojo.Category;
 import com.example.yumfit.pojo.Country;
 import com.example.yumfit.pojo.Ingredient;
 import com.example.yumfit.pojo.Meal;
+import com.example.yumfit.pojo.MealResponse;
 import com.example.yumfit.pojo.RepoInterface;
 import com.example.yumfit.search.view.SearchViewInterface;
 
@@ -72,6 +73,11 @@ public class SearchPresenter implements NetworkDelegate, SearchPresenterInterfac
     @Override
     public void onSuccessResultMeal(List<Meal> meals) {
         searchView.onGetMeals(meals);
+    }
+
+    @Override
+    public void onSuccessFilter(MealResponse meals) {
+
     }
 
     @Override

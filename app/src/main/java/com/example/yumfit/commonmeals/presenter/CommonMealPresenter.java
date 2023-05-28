@@ -1,6 +1,6 @@
-package com.example.yumfit.details.presenter;
+package com.example.yumfit.commonmeals.presenter;
 
-import com.example.yumfit.details.view.DetailsViewInterface;
+import com.example.yumfit.commonmeals.view.CommonMealViewInterface;
 import com.example.yumfit.network.NetworkDelegate;
 import com.example.yumfit.pojo.Category;
 import com.example.yumfit.pojo.Country;
@@ -11,19 +11,13 @@ import com.example.yumfit.pojo.RepoInterface;
 
 import java.util.List;
 
-public class DetailsPresenter implements NetworkDelegate, DetailsPresenterInterface{
+public class CommonMealPresenter implements NetworkDelegate, CommonMealPresenterInterface {
     private RepoInterface repo;
-    private DetailsViewInterface detailsView;
+    private CommonMealViewInterface commonMealView;
 
-    public DetailsPresenter(RepoInterface repo, DetailsViewInterface detailsView){
+    public CommonMealPresenter(RepoInterface repo, CommonMealViewInterface commonMealView) {
         this.repo = repo;
-        this.detailsView = detailsView;
-    }
-
-    @Override
-    public void getMealById(String id) {
-        repo.getMealById(id,this);
-
+        this.commonMealView = commonMealView;
     }
 
     @Override
@@ -33,7 +27,7 @@ public class DetailsPresenter implements NetworkDelegate, DetailsPresenterInterf
 
     @Override
     public void onSuccessResultMeal(List<Meal> meals) {
-        detailsView.onGetMealDetails(meals);
+
     }
 
     @Override
@@ -58,6 +52,6 @@ public class DetailsPresenter implements NetworkDelegate, DetailsPresenterInterf
 
     @Override
     public void onFailureResult(String message) {
-        detailsView.onFailToGetMealDetails(message);
+
     }
 }

@@ -27,6 +27,7 @@ import com.example.yumfit.pojo.Category;
 import com.example.yumfit.pojo.Country;
 import com.example.yumfit.pojo.Ingredient;
 import com.example.yumfit.pojo.Meal;
+import com.example.yumfit.pojo.MealResponse;
 import com.example.yumfit.pojo.Repo;
 import com.example.yumfit.pojo.RepoInterface;
 
@@ -102,6 +103,8 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
         dailyAdapter.notifyDataSetChanged();
     }
 
+
+
     @Override
     public void setListToCategoriesAdapter(List<Category> categories) {
         categoryAdapter.setList((ArrayList<Category>) categories);
@@ -126,9 +129,6 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
 
     @Override
     public void onDailyInspirationItemClicked(Meal meal) {
-        //here we need to navigate to details screen
-
-        Toast.makeText(dailyRecyclerView.getContext(), meal.getStrMeal()+ " clicked", Toast.LENGTH_SHORT).show();
         HomeViewFragmentDirections.ActionHomeFragmentToDetailsFragment action =
                 HomeViewFragmentDirections.actionHomeFragmentToDetailsFragment(meal.getIdMeal());
         Navigation.findNavController(getView()).navigate(action);
@@ -136,15 +136,20 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
 
     @Override
     public void onCountryItemClicked(Country country) {
-        //here we need to navigate to country details screen
-        Toast.makeText(dailyRecyclerView.getContext(), country.getStrArea()+ " clicked", Toast.LENGTH_SHORT).show();
+         presenter.getMealsByCountry(country.getStrArea());
+
+    }
+
+    @Override
+    public void onSuccessToFilter(MealResponse meals) {
+         HomeViewFragmentDirections.ActionHomeFragmentToCommonMeals action =
+           HomeViewFragmentDirections.actionHomeFragmentToCommonMeals(meals);
+        Navigation.findNavController(getView()).navigate(action);
     }
 
     @Override
     public void onCategoryItemClicked(Category category) {
-        //here we need to navigate to country details screen
-        Toast.makeText(dailyRecyclerView.getContext(), category.getStrCategory()+ " clicked", Toast.LENGTH_SHORT).show();
-
+         presenter.getMealsByCategory(category.getStrCategory());
     }
 
 }

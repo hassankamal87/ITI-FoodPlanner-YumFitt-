@@ -82,6 +82,12 @@ public class DetailsFragment extends Fragment implements DetailsViewInterface {
         detailsPresenter.getMealById(id);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((Home2Activity) requireActivity()).bottomNavigationView.setVisibility(View.GONE);
+    }
+
     private void initializeViews(View view) {
         mealImg = view.findViewById(R.id.detailsImageView);
         mealNameTV = view.findViewById(R.id.detailsMealNameTextView);
