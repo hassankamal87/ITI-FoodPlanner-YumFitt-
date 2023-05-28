@@ -31,7 +31,11 @@
         android:id="@+id/favouriteFragment"
         android:name="com.example.yumfit.favourite.view.FavouriteFragment"
         android:label="Favourite Meals"
-        tools:layout="@layout/fragment_favourite" />
+        tools:layout="@layout/fragment_favourite" >
+        <action
+            android:id="@+id/action_favouriteFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.yumfit.profile.view.ProfileFragment"
