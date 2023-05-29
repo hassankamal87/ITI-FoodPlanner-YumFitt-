@@ -38,7 +38,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favouriteRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="120dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/favTitle"
         tools:listitem="@layout/meal_item"

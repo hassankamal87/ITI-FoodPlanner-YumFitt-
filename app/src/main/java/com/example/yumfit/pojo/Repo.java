@@ -95,4 +95,14 @@ public class Repo implements RepoInterface {
     public LiveData<List<Meal>> getAllFavouriteMeals() {
         return localSource.getAllMeals();
     }
+
+    @Override
+    public LiveData<List<Meal>> getMealsOfDay(String day) {
+        return localSource.getMealsOfDay(day);
+    }
+
+    @Override
+    public void updateDayOfMeal(String id, String day) {
+        localSource.updateDayOfMeal(id, day);
+    }
 }

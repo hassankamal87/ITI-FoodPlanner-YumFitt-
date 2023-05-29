@@ -65,6 +65,7 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeViews(view);
+
         RemoteSource remoteSource = ClientService.getInstance(view.getContext());
         LocalSource localSource = ConcreteLocalSource.getInstance(view.getContext());
         RepoInterface repo = Repo.getInstance(remoteSource, localSource);
@@ -102,8 +103,6 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
         dailyAdapter.setList((ArrayList<Meal>) meals);
         dailyAdapter.notifyDataSetChanged();
     }
-
-
 
     @Override
     public void setListToCategoriesAdapter(List<Category> categories) {

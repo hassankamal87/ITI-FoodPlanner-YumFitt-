@@ -43,4 +43,14 @@ public class ConcreteLocalSource implements LocalSource {
     public LiveData<List<Meal>> getAllMeals() {
         return mealsDao.getAllMeals();
     }
+
+    @Override
+    public LiveData<List<Meal>> getMealsOfDay(String day) {
+        return mealsDao.getMealsOfDay(day);
+    }
+
+    @Override
+    public void updateDayOfMeal(String id, String day) {
+        mealsDao.updateColumnDay(id,day);
+    }
 }

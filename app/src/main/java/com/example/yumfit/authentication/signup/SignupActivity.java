@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -44,9 +45,10 @@ public class SignupActivity extends AppCompatActivity {
             }else{
                 nextBtn.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
-                String email, password;
+                String email, password,name;
                 email = String.valueOf(emailET.getText());
                 password = String.valueOf(passwordET.getText());
+                name = String.valueOf(nameET.getText());
 
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -56,7 +58,9 @@ public class SignupActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(SignupActivity.this, "Authentication Successful", Toast.LENGTH_SHORT).show();
                                     intent.setClass(SignupActivity.this, Home2Activity.class);
+                                    mAuth.getCurrentUser().updateProfile(new UserProfileChangeRequest.Builder().setDisplayName(name).build());
                                     startActivity(intent);
+
                                     // Sign in success, update UI with the signed-in user's information
                                     //FirebaseUser user = mAuth.getCurrentUser();
                                     //updateUI(user);

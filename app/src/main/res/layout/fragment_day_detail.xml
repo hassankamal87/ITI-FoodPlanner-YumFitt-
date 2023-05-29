@@ -4,32 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".commonmeals.view.CommonMealsFragment">
+    tools:context=".daydetail.view.DayDetailFragment">
+
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/dayName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/tasty_treats_await"
-        android:textSize="40sp"
+        android:text="@string/saturday"
         android:textStyle="bold"
+        android:textSize="35sp"
         android:textColor="@color/black"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mealRecycler"
+        android:id="@+id/mealsRecyclerPlan"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="80dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="70dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"
-        tools:listitem="@layout/meal_item"
         />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

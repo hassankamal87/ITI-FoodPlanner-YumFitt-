@@ -13,14 +13,7 @@ public interface SearchPresenterInterface {
     void getMealByName(String name);
 
     void getMealByFirstChar(String firstChar);
-
-    void getMealById(String id);
-
-    void getAllCategories();
-
-    void getAllCountries();
-
-    void getAllIngredient();
+    void getRandomMeal();
 
     void insertMeal(Meal meal);
 }

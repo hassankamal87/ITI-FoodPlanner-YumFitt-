@@ -36,4 +36,6 @@ public interface RepoInterface {
     void deleteAllFavouriteMeals();
 
     LiveData<List<Meal>> getAllFavouriteMeals();
+    LiveData<List<Meal>> getMealsOfDay(String day);
+    void updateDayOfMeal(String id, String day);
 }

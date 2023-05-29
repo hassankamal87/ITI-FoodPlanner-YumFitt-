@@ -24,9 +24,9 @@ public class ClientService implements RemoteSource {
     private MealApiInterface mealApiInterface;
     private static final String BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
 
-    private ClientService(Context context){
+    private ClientService(Context context) {
         File cacheDirectory = new File(context.getCacheDir(), "offline_cache_directory");
-        Cache cache = new Cache(cacheDirectory,80 *1024 * 1024);
+        Cache cache = new Cache(cacheDirectory, 80 * 1024 * 1024);
 
         OkHttpClient okHttpClient = new OkHttpClient
                 .Builder().cache(cache).build();
@@ -40,8 +40,8 @@ public class ClientService implements RemoteSource {
         mealApiInterface = retrofit.create(MealApiInterface.class);
     }
 
-    public static synchronized ClientService getInstance(Context context){
-        if(instance == null){
+    public static synchronized ClientService getInstance(Context context) {
+        if (instance == null) {
             instance = new ClientService(context);
         }
         return instance;
@@ -52,8 +52,12 @@ public class ClientService implements RemoteSource {
         mealApiInterface.getMealByName(name).enqueue(new Callback<MealResponse>() {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
-                Log.d(TAG, "onResponse: done to get Meal by Name and size equal "+ response.body().getMeals().size());
-                networkDelegate.onSuccessResultMeal(response.body().getMeals());
+                if (response.body().getMeals() != null) {
+                    Log.d(TAG, "onResponse: done to get Meal by Name and size equal " + response.body().getMeals().size());
+                    networkDelegate.onSuccessResultMeal(response.body().getMeals());
+                }else{
+                    networkDelegate.onFailureResult("no Result..");
+                }
             }
 
             @Override
@@ -69,7 +73,7 @@ public class ClientService implements RemoteSource {
         mealApiInterface.getMealByFirstChar(firstChar).enqueue(new Callback<MealResponse>() {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
-                Log.d(TAG, "onResponse: done to get Meal by FirstChar and size equal "+ response.body().getMeals().size());
+                Log.d(TAG, "onResponse: done to get Meal by FirstChar and size equal " + response.body().getMeals().size());
                 networkDelegate.onSuccessResultMeal(response.body().getMeals());
             }
 
@@ -86,7 +90,7 @@ public class ClientService implements RemoteSource {
         mealApiInterface.getMealById(id).enqueue(new Callback<MealResponse>() {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
-                Log.d(TAG, "onResponse: done to get Meal by Id and size equal "+ response.body().getMeals().size());
+                Log.d(TAG, "onResponse: done to get Meal by Id and size equal " + response.body().getMeals().size());
                 networkDelegate.onSuccessResultMeal(response.body().getMeals());
             }
 
@@ -103,7 +107,7 @@ public class ClientService implements RemoteSource {
         mealApiInterface.getRandomMeal().enqueue(new Callback<MealResponse>() {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
-                Log.d(TAG, "onResponse: done get RandomMeal and the name is : "+ response.body().getMeals().get(0).getStrMeal());
+                Log.d(TAG, "onResponse: done get RandomMeal and the name is : " + response.body().getMeals().get(0).getStrMeal());
                 networkDelegate.onSuccessResultMeal(response.body().getMeals());
             }
 
@@ -120,7 +124,7 @@ public class ClientService implements RemoteSource {
         mealApiInterface.getAllCategories().enqueue(new Callback<CategoryResponse>() {
             @Override
             public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
-                Log.d(TAG, "onResponse: done to get All categories and size equal "+ response.body().getCategories().size());
+                Log.d(TAG, "onResponse: done to get All categories and size equal " + response.body().getCategories().size());
                 networkDelegate.onSuccessResultCategory(response.body().getCategories());
             }
 
@@ -137,7 +141,7 @@ public class ClientService implements RemoteSource {
         mealApiInterface.getAllCountries().enqueue(new Callback<CountryResponse>() {
             @Override
             public void onResponse(Call<CountryResponse> call, Response<CountryResponse> response) {
-                Log.d(TAG, "onResponse: done to get All Countries and size equal "+ response.body().getCountries().size());
+                Log.d(TAG, "onResponse: done to get All Countries and size equal " + response.body().getCountries().size());
                 networkDelegate.onSuccessResultCountries(response.body().getCountries());
             }
 
@@ -154,7 +158,7 @@ public class ClientService implements RemoteSource {
         mealApiInterface.getAllIngredient().enqueue(new Callback<IngredientResponse>() {
             @Override
             public void onResponse(Call<IngredientResponse> call, Response<IngredientResponse> response) {
-                Log.d(TAG, "onResponse: done to get All Ingredient and size equal "+ response.body().getIngredient().size());
+                Log.d(TAG, "onResponse: done to get All Ingredient and size equal " + response.body().getIngredient().size());
                 networkDelegate.onSuccessResultIngredient(response.body().getIngredient());
             }
 
@@ -171,8 +175,12 @@ public class ClientService implements RemoteSource {
         mealApiInterface.getMealsByIngredient(ingredient).enqueue(new Callback<MealResponse>() {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
-                Log.d(TAG, "onResponse: done to get Meals by Ingredient and size equal "+ response.body().getMeals().size());
-                networkDelegate.onSuccessFilter(response.body());
+                if (response.body().getMeals() != null) {
+                    Log.d(TAG, "onResponse: done to get Meals by Ingredient and size equal " + response.body().getMeals().size());
+                    networkDelegate.onSuccessFilter(response.body());
+                } else {
+                    networkDelegate.onFailureResult("no Result..");
+                }
             }
 
             @Override
@@ -188,8 +196,12 @@ public class ClientService implements RemoteSource {
         mealApiInterface.getMealsByCategory(category).enqueue(new Callback<MealResponse>() {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
-                Log.d(TAG, "onResponse: done to get meals by Category and size equal "+ response.body().getMeals().size());
-                networkDelegate.onSuccessFilter(response.body());
+                if (response.body().getMeals() != null) {
+                    Log.d(TAG, "onResponse: done to get meals by Category and size equal " + response.body().getMeals().size());
+                    networkDelegate.onSuccessFilter(response.body());
+                } else {
+                    networkDelegate.onFailureResult("no Result..");
+                }
             }
 
             @Override
@@ -205,8 +217,12 @@ public class ClientService implements RemoteSource {
         mealApiInterface.getMealsByCountry(country).enqueue(new Callback<MealResponse>() {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
-                Log.d(TAG, "onResponse: done to get Meals By Countries and size equal "+ response.body().getMeals().size());
-                networkDelegate.onSuccessFilter(response.body());
+                if (response.body().getMeals() != null) {
+                    Log.d(TAG, "onResponse: done to get Meals By Countries and size equal " + response.body().getMeals().size());
+                    networkDelegate.onSuccessFilter(response.body());
+                } else {
+                    networkDelegate.onFailureResult("no Result..");
+                }
             }
 
             @Override

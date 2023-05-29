@@ -11,11 +11,11 @@ import com.example.yumfit.search.view.SearchViewInterface;
 
 import java.util.List;
 
-public class SearchPresenter implements NetworkDelegate, SearchPresenterInterface{
+public class SearchPresenter implements NetworkDelegate, SearchPresenterInterface {
     private RepoInterface repo;
     private SearchViewInterface searchView;
 
-    public SearchPresenter(RepoInterface repo, SearchViewInterface searchView){
+    public SearchPresenter(RepoInterface repo, SearchViewInterface searchView) {
         this.repo = repo;
         this.searchView = searchView;
     }
@@ -46,23 +46,8 @@ public class SearchPresenter implements NetworkDelegate, SearchPresenterInterfac
     }
 
     @Override
-    public void getMealById(String id) {
-        repo.getMealById(id, this);
-    }
-
-    @Override
-    public void getAllCategories() {
-        repo.getAllCategories(this);
-    }
-
-    @Override
-    public void getAllCountries() {
-        repo.getAllCountries(this);
-    }
-
-    @Override
-    public void getAllIngredient() {
-        repo.getAllIngredient(this);
+    public void getRandomMeal() {
+        repo.getRandomMeal(this);
     }
 
     @Override
@@ -77,7 +62,7 @@ public class SearchPresenter implements NetworkDelegate, SearchPresenterInterfac
 
     @Override
     public void onSuccessFilter(MealResponse meals) {
-
+        searchView.onGetMeals(meals.getMeals());
     }
 
     @Override

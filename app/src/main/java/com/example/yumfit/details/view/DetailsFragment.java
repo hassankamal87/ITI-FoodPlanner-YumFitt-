@@ -49,6 +49,7 @@ public class DetailsFragment extends Fragment implements DetailsViewInterface {
     IngredientRecyclerAdapter ingredientAdapter;
     DetailsPresenterInterface detailsPresenter;
     String id;
+    Meal currentMeal;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +81,13 @@ public class DetailsFragment extends Fragment implements DetailsViewInterface {
         //this when i come to this fragment start to send request to fetch all data about this id
         id = DetailsFragmentArgs.fromBundle(getArguments()).getId();
         detailsPresenter.getMealById(id);
+
+        addToPlanBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                detailsPresenter.updateDayOfMeal(currentMeal.getIdMeal(),"saturday");
+            }
+        });
     }
 
     @Override
@@ -104,6 +112,7 @@ public class DetailsFragment extends Fragment implements DetailsViewInterface {
 
     @Override
     public void onGetMealDetails(List<Meal> meals) {
+        currentMeal = meals.get(0);
         Glide.with(getContext()).load(meals.get(0).getStrMealThumb())
                 .apply(new RequestOptions().override(500,500)
                         .placeholder(R.drawable.ic_launcher_foreground)

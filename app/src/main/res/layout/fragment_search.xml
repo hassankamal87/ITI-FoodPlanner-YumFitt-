@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/may_white"
     tools:context=".search.view.SearchFragment">
 
 
@@ -25,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/search_background"
+        android:elevation="20dp"
         android:hint="@string/search_recipes"
         android:textColor="@color/black"
         android:layout_marginTop="5dp"
@@ -39,7 +39,7 @@
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:checkedButton="@+id/radio_button_1"
+        android:checkedButton="@+id/country_radioBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,31 +47,54 @@
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/etSearch">
         <RadioButton
-            android:id="@+id/radio_button_1"
+            android:id="@+id/meal_radioBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/meal"/>
+        <RadioButton
+            android:id="@+id/country_radioBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/country"/>
         <RadioButton
-            android:id="@+id/radio_button_2"
+            android:id="@+id/ingredient_radioBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/ingredients"/>
         <RadioButton
-            android:id="@+id/radio_button_3"
+            android:id="@+id/category_radioBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/category"/>
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/nullTextViewInsearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="300dp"
+        android:textSize="40sp"
+        android:text="@string/no_result"
+        android:textColor="@color/text_grey"
+        android:textStyle="bold"
+        android:visibility="gone"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchRecycler"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="160dp"
+        android:layout_marginBottom="70dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/radioGroup"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+
         tools:listitem="@layout/meal_item"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

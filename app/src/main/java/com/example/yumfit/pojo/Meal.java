@@ -15,6 +15,8 @@ public class Meal implements Parcelable {
     @PrimaryKey
     @NonNull
     private String idMeal;
+    private String day;
+
     private String nameDay;
     private String strMeal;
     private String strDrinkAlternate;
@@ -464,6 +466,14 @@ public class Meal implements Parcelable {
 
     public void setStrMeasure20(String strMeasure20) {
         this.strMeasure20 = strMeasure20;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
     @Override

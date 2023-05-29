@@ -15,4 +15,6 @@ public interface LocalSource {
     void deleteAllMeals() ;
 
     LiveData<List<Meal>> getAllMeals();
+    LiveData<List<Meal>> getMealsOfDay(String day);
+    void updateDayOfMeal(String id, String day);
 }

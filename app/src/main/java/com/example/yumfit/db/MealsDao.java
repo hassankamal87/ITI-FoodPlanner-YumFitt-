@@ -24,4 +24,10 @@ public interface MealsDao {
 
     @Query("SELECT * FROM meals_table")
     LiveData<List<Meal>> getAllMeals();
+
+    @Query("SELECT * From meals_table WHERE day = :day")
+    LiveData<List<Meal>> getMealsOfDay(String day);
+
+    @Query("UPDATE meals_table SET day = :day WHERE idMeal = :id")
+    void updateColumnDay(String id, String day);
 }

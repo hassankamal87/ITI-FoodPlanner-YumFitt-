@@ -13,10 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.YumFit"
+        android:screenOrientation="portrait"
         tools:targetApi="31" >
         <activity
             android:name=".ui.Home2Activity"
-            android:screenOrientation="portrait"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"

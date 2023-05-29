@@ -32,6 +32,11 @@ public class DetailsPresenter implements NetworkDelegate, DetailsPresenterInterf
     }
 
     @Override
+    public void updateDayOfMeal(String id, String day) {
+        repo.updateDayOfMeal(id, day);
+    }
+
+    @Override
     public void onSuccessResultMeal(List<Meal> meals) {
         detailsView.onGetMealDetails(meals);
     }

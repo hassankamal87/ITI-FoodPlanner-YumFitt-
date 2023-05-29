@@ -21,12 +21,20 @@
         android:id="@+id/searchFragment"
         android:name="com.example.yumfit.search.view.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_detailsFragment2"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mealPlanFragment"
         android:name="com.example.yumfit.plan.view.MealPlanFragment"
         android:label="Meal Plan"
-        tools:layout="@layout/fragment_meal_plan" />
+        tools:layout="@layout/fragment_meal_plan" >
+        <action
+            android:id="@+id/action_mealPlanFragment_to_dayDetailFragment"
+            app:destination="@id/dayDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favouriteFragment"
         android:name="com.example.yumfit.favourite.view.FavouriteFragment"
@@ -61,5 +69,17 @@
         <action
             android:id="@+id/action_commonMeals_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dayDetailFragment"
+        android:name="com.example.yumfit.daydetail.view.DayDetailFragment"
+        android:label="fragment_day_detail"
+        tools:layout="@layout/fragment_day_detail" >
+        <action
+            android:id="@+id/action_dayDetailFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+        <argument
+            android:name="day"
+            app:argType="string" />
     </fragment>
 </navigation>
