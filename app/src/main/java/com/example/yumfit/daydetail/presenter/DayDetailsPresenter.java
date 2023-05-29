@@ -33,5 +33,10 @@ public class DayDetailsPresenter implements DayPresenterInterface{
         repo.deleteMealFromFavourite(meal);
     }
 
+    @Override
+    public void updateDayOfMeal(String id, String day) {
+        repo.updateDayOfMeal(id, day);
+    }
+
 
 }

@@ -61,7 +61,7 @@
     <string name="empty">Time to Refuel...</string>
     <string name="meal">meal</string>
     <string name="no_result">No Result..</string>
-    <string name="yor_plan">Yor Plan</string>
+    <string name="yor_plan">Your Plan</string>
     <string name="saturday">Saturday</string>
 
     <string-array name="flags">

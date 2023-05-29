@@ -9,4 +9,6 @@ import java.util.List;
 public interface DayPresenterInterface {
     void getMealsForDay(String day);
     void deleteMeal(Meal meal);
+
+    void updateDayOfMeal(String id, String day);
 }

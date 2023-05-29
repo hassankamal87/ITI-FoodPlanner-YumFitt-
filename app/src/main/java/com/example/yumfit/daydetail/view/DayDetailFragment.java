@@ -24,6 +24,7 @@ import com.example.yumfit.network.RemoteSource;
 import com.example.yumfit.pojo.Meal;
 import com.example.yumfit.pojo.Repo;
 import com.example.yumfit.pojo.RepoInterface;
+import com.example.yumfit.ui.Home2Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,13 @@ public class DayDetailFragment extends Fragment implements DayViewInterface, OnD
     RecyclerView mealsRecyclerPlan;
     DayPresenterInterface detailsPresenter;
     DayMealAdapter dayAdapter;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((Home2Activity) requireActivity()).bottomNavigationView.setVisibility(View.GONE);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +60,7 @@ public class DayDetailFragment extends Fragment implements DayViewInterface, OnD
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        initializeViews(view);
         day = DayDetailFragmentArgs.fromBundle(getArguments()).getDay();
         RemoteSource remoteSource = ClientService.getInstance(getContext());
         LocalSource localSource = ConcreteLocalSource.getInstance(getContext());
@@ -62,10 +70,9 @@ public class DayDetailFragment extends Fragment implements DayViewInterface, OnD
         detailsPresenter.getMealsForDay(day);
 
 
-
     }
 
-    void initializeViews(View view){
+    void initializeViews(View view) {
         mealsRecyclerPlan = view.findViewById(R.id.mealsRecyclerPlan);
         dayAdapter = new DayMealAdapter(view.getContext(), this);
         mealsRecyclerPlan.setAdapter(dayAdapter);
@@ -73,13 +80,15 @@ public class DayDetailFragment extends Fragment implements DayViewInterface, OnD
 
     @Override
     public void onGetMealOfDay(List<Meal> favouriteMeals) {
-        dayAdapter.setList((ArrayList<Meal>) favouriteMeals);
-        dayAdapter.notifyDataSetChanged();
+        if (favouriteMeals != null) {
+            dayAdapter.setList((ArrayList<Meal>) favouriteMeals);
+            dayAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
     public void onDeleteBtnClicked(Meal meal) {
-        detailsPresenter.deleteMeal(meal);
+        detailsPresenter.updateDayOfMeal(meal.getIdMeal(), "no day");
     }
 
     @Override
@@ -87,5 +96,11 @@ public class DayDetailFragment extends Fragment implements DayViewInterface, OnD
         DayDetailFragmentDirections.ActionDayDetailFragmentToDetailsFragment action =
                 DayDetailFragmentDirections.actionDayDetailFragmentToDetailsFragment(id);
         Navigation.findNavController(getView()).navigate(action);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ((Home2Activity) requireActivity()).bottomNavigationView.setVisibility(View.VISIBLE);
     }
 }

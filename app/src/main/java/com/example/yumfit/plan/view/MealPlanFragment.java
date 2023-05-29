@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -42,5 +43,8 @@ public class MealPlanFragment extends Fragment implements OnPlanClickInterface {
     @Override
     public void onShowBtnClicked(String day) {
         //we should navigate to fragment show plan for these day
+        MealPlanFragmentDirections.ActionMealPlanFragmentToDayDetailFragment action =
+                MealPlanFragmentDirections.actionMealPlanFragmentToDayDetailFragment(day);
+        Navigation.findNavController(getView()).navigate(action);
     }
 }

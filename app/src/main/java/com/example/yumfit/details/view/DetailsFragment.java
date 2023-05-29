@@ -85,6 +85,7 @@ public class DetailsFragment extends Fragment implements DetailsViewInterface {
         addToPlanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                detailsPresenter.insertMealToFavourite(currentMeal);
                 detailsPresenter.updateDayOfMeal(currentMeal.getIdMeal(),"saturday");
             }
         });
