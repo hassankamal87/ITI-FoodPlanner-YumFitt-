@@ -30,6 +30,11 @@ public class ConcreteLocalSource implements LocalSource {
     }
 
     @Override
+    public void insertAllFav(List<Meal> meals) {
+        mealsDao.insertAllFav(meals);
+    }
+
+    @Override
     public void deleteMeal(Meal meal) {
         mealsDao.deleteMeal(meal);
     }

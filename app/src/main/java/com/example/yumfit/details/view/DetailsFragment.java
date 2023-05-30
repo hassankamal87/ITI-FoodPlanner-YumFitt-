@@ -1,5 +1,8 @@
 package com.example.yumfit.details.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,9 +10,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.CalendarContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,6 +39,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -41,7 +47,7 @@ public class DetailsFragment extends Fragment implements DetailsViewInterface {
 
     ImageView mealImg;
     TextView mealNameTV, mealCountryTV, mealDescriptionTV;
-    Button addToPlanBtn;
+    Button addToPlanBtn, addToYourCalender;
     RecyclerView ingredientRecyclerView;
     YouTubePlayerView youTubePlayer;
     String[] videoArray;
@@ -50,6 +56,7 @@ public class DetailsFragment extends Fragment implements DetailsViewInterface {
     DetailsPresenterInterface detailsPresenter;
     String id;
     Meal currentMeal;
+    int mSelectedIndex;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,11 +93,47 @@ public class DetailsFragment extends Fragment implements DetailsViewInterface {
             @Override
             public void onClick(View v) {
                 detailsPresenter.insertMealToFavourite(currentMeal);
-                detailsPresenter.updateDayOfMeal(currentMeal.getIdMeal(),"saturday");
+                showDialog();
+
+                // detailsPresenter.updateDayOfMeal(currentMeal.getIdMeal(),"saturday");
+            }
+        });
+
+        addToYourCalender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToMobileCalender();
             }
         });
     }
 
+    private void showDialog() {
+        List<String> daysOfWeek = Arrays.asList("SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_single_choice, daysOfWeek);
+
+        new AlertDialog.Builder(getContext())
+                .setTitle("Select a day of the week")
+                .setSingleChoiceItems(adapter, 0, (dialog, which) -> mSelectedIndex = which)
+                .setPositiveButton("OK", (dialog, which) -> {
+                    if (mSelectedIndex >= 0) {
+                        String selectedDay = daysOfWeek.get(mSelectedIndex);
+                        detailsPresenter.updateDayOfMeal(currentMeal.getIdMeal(), selectedDay.toLowerCase());
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void addToMobileCalender(){
+        Intent intent = new Intent(Intent.ACTION_INSERT)
+                .setData(CalendarContract.Events.CONTENT_URI)
+                .putExtra(CalendarContract.Events.TITLE, currentMeal.getStrMeal())
+                .putExtra(CalendarContract.Events.DESCRIPTION, "Enjoy a delicious " + currentMeal.getStrMeal() + " for dinner!")
+                .putExtra(CalendarContract.Events.EVENT_LOCATION, "Home")
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, System.currentTimeMillis())
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, System.currentTimeMillis() + (60 * 60 * 1000)); // End time is 1 hour after start time
+        startActivity(intent);
+    }
     @Override
     public void onResume() {
         super.onResume();
@@ -103,6 +146,7 @@ public class DetailsFragment extends Fragment implements DetailsViewInterface {
         mealCountryTV = view.findViewById(R.id.detailsCountryName);
         mealDescriptionTV = view.findViewById(R.id.detailsDescriptionOfmeal);
         addToPlanBtn = view.findViewById(R.id.detailsAddToPlanBtn);
+        addToYourCalender = view.findViewById(R.id.addToYourCalender);
         ingredientRecyclerView = view.findViewById(R.id.detailsIngredientRecycler);
         youTubePlayer = view.findViewById(R.id.youtubePlayer);
         ingredientAdapter = new IngredientRecyclerAdapter(view.getContext());

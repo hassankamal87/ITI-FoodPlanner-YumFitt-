@@ -26,6 +26,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -79,6 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
         signUpEmailBtn = findViewById(R.id.emailBtn);
         logInTV = findViewById(R.id.logInTV);
         logInTV.setPaintFlags(logInTV.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
     }
 
     @Override

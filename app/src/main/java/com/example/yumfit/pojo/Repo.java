@@ -82,6 +82,11 @@ public class Repo implements RepoInterface {
     }
 
     @Override
+    public void insertAllFav(List<Meal> meals) {
+        localSource.insertAllFav(meals);
+    }
+
+    @Override
     public void deleteMealFromFavourite(Meal meal) {
         localSource.deleteMeal(meal);
     }

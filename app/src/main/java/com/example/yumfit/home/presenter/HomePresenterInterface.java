@@ -3,6 +3,8 @@ package com.example.yumfit.home.presenter;
 import com.example.yumfit.network.NetworkDelegate;
 import com.example.yumfit.pojo.Meal;
 
+import java.util.List;
+
 public interface HomePresenterInterface {
     void getRandomMeal();
     void getAllCategories();
@@ -10,6 +12,7 @@ public interface HomePresenterInterface {
     void getAllIngredient();
     void insertMeal(Meal meal);
 
+    void insertAllFav(List<Meal> meals);
     void getMealsByCategory(String category);
     void getMealsByCountry(String country);
 }

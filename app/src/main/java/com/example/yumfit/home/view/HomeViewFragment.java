@@ -9,6 +9,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,9 +31,23 @@ import com.example.yumfit.pojo.Meal;
 import com.example.yumfit.pojo.MealResponse;
 import com.example.yumfit.pojo.Repo;
 import com.example.yumfit.pojo.RepoInterface;
+import com.example.yumfit.pojo.UserPojo;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class HomeViewFragment extends Fragment implements HomeViewInterface, OnClickInterface {
@@ -42,6 +57,11 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
     DailyRecyclerAdapter dailyAdapter;
     CountryRecyclerAdapter countryAdapter;
     CategoryRecyclerAdapter categoryAdapter;
+    FirebaseFirestore db;
+    boolean isExist = false;
+    FirebaseUser currentUser;
+    UserPojo userPojo;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +86,8 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
         super.onViewCreated(view, savedInstanceState);
         initializeViews(view);
 
+        checkDataInFireStore();
+
         RemoteSource remoteSource = ClientService.getInstance(view.getContext());
         LocalSource localSource = ConcreteLocalSource.getInstance(view.getContext());
         RepoInterface repo = Repo.getInstance(remoteSource, localSource);
@@ -78,10 +100,11 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
     }
 
     private void initializeViews(View view) {
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
         dailyRecyclerView = view.findViewById(R.id.dailyInspirationRecycler);
         countryRecyclerView = view.findViewById(R.id.countriesRecyclerView);
         categoryRecyclerView = view.findViewById(R.id.categoriesRecyclerView);
-        dailyAdapter = new DailyRecyclerAdapter(view.getContext(),this);
+        dailyAdapter = new DailyRecyclerAdapter(view.getContext(), this);
         countryAdapter = new CountryRecyclerAdapter(view.getContext(), this);
         categoryAdapter = new CategoryRecyclerAdapter(view.getContext(), this);
 
@@ -89,13 +112,13 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
 
         dailyRecyclerView.setAdapter(dailyAdapter);
-        //dailyRecyclerView.setLayoutManager(linearLayoutManager);
 
         countryRecyclerView.setAdapter(countryAdapter);
-        //countryRecyclerView.setLayoutManager(linearLayoutManager);
 
         categoryRecyclerView.setAdapter(categoryAdapter);
-        //categoryRecyclerView.setLayoutManager(linearLayoutManager);
+
+        db = FirebaseFirestore.getInstance();
+        userPojo = new UserPojo();
     }
 
     @Override
@@ -118,7 +141,7 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
 
     @Override
     public void onFailureResult(String message) {
-        Toast.makeText(dailyRecyclerView.getContext(), "error while : "+ message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(dailyRecyclerView.getContext(), "error while : " + message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -135,20 +158,70 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
 
     @Override
     public void onCountryItemClicked(Country country) {
-         presenter.getMealsByCountry(country.getStrArea());
+        presenter.getMealsByCountry(country.getStrArea());
 
     }
 
     @Override
     public void onSuccessToFilter(MealResponse meals) {
-         HomeViewFragmentDirections.ActionHomeFragmentToCommonMeals action =
-           HomeViewFragmentDirections.actionHomeFragmentToCommonMeals(meals);
+        HomeViewFragmentDirections.ActionHomeFragmentToCommonMeals action =
+                HomeViewFragmentDirections.actionHomeFragmentToCommonMeals(meals);
         Navigation.findNavController(getView()).navigate(action);
     }
 
     @Override
     public void onCategoryItemClicked(Category category) {
-         presenter.getMealsByCategory(category.getStrCategory());
+        presenter.getMealsByCategory(category.getStrCategory());
+    }
+
+
+    private void checkDataInFireStore() {
+        db.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (document.getId().equals(currentUser.getUid())) {
+                                    //her you need to contain data from FireStore to your object
+                                    Map<String, Object> data = document.getData();
+                                    userPojo = new UserPojo((Map<String, Object>) data.get("userPojo"));
+                                    if (userPojo.getFavMeals() != null)
+                                        presenter.insertAllFav(userPojo.getFavMeals());
+                                    isExist = true;
+                                }
+                            }
+                            if (!isExist) {
+                                createNewUserInFireStore();
+                            }
+                        } else {
+                            Log.d("hey", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void createNewUserInFireStore() {
+        Map<String, Object> user = new HashMap<>();
+        UserPojo newUser = new UserPojo(currentUser.getDisplayName(), currentUser.getEmail());
+        user.put("userPojo", newUser);
+
+        db.collection("users")
+                .document(currentUser.getUid())
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("hey", "new User Added");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("hey", "Error adding document", e);
+                    }
+                });
     }
 
 }

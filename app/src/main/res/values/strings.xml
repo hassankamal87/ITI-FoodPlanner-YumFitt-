@@ -63,6 +63,7 @@
     <string name="no_result">No Result..</string>
     <string name="yor_plan">Your Plan</string>
     <string name="saturday">Saturday</string>
+    <string name="add_to_calender">ADD TO CALENDER</string>
 
     <string-array name="flags">
         <item>https://www.worldometers.info/img/flags/us-flag.gif</item>

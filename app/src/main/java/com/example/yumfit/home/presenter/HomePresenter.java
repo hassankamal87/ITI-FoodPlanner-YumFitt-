@@ -56,6 +56,11 @@ public class HomePresenter implements NetworkDelegate, HomePresenterInterface {
         repo.insertMealToFavourite(meal);
     }
 
+    @Override
+    public void insertAllFav(List<Meal> meals) {
+        repo.insertAllFav(meals);
+    }
+
 
     //Delegate
     @Override

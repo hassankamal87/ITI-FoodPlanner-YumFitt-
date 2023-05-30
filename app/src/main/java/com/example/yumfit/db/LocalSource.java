@@ -10,6 +10,8 @@ public interface LocalSource {
 
     void insertMeal(Meal meal);
 
+    public void insertAllFav(List<Meal> meals);
+
     void deleteMeal(Meal meal);
 
     void deleteAllMeals() ;

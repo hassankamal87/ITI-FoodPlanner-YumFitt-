@@ -31,6 +31,8 @@ public interface RepoInterface {
     //db
     void insertMealToFavourite(Meal meal);
 
+    void insertAllFav(List<Meal> meals);
+
     void deleteMealFromFavourite(Meal meal);
 
     void deleteAllFavouriteMeals();
