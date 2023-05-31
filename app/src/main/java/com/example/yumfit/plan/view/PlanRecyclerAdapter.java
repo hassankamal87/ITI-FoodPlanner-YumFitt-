@@ -43,13 +43,13 @@ public class PlanRecyclerAdapter extends RecyclerView.Adapter<PlanRecyclerAdapte
     }
 
     public void setList() {
+        myList.add("saturday");
+        myList.add("sunday");
         myList.add("monday");
         myList.add("tuesday");
         myList.add("wednesday");
         myList.add("thursday");
         myList.add("friday");
-        myList.add("saturday");
-        myList.add("sunday");
         notifyDataSetChanged();
     }
 

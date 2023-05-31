@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.yumfit.R;
@@ -38,6 +39,8 @@ public class DayDetailFragment extends Fragment implements DayViewInterface, OnD
 
 
     String day;
+
+    TextView nameDay;
     RecyclerView mealsRecyclerPlan;
     DayPresenterInterface detailsPresenter;
     DayMealAdapter dayAdapter;
@@ -72,11 +75,12 @@ public class DayDetailFragment extends Fragment implements DayViewInterface, OnD
         detailsPresenter = new DayDetailsPresenter(repo, this);
 
         detailsPresenter.getMealsForDay(day);
-
+        nameDay.setText(day);
 
     }
 
     void initializeViews(View view) {
+        nameDay = view.findViewById(R.id.dayName);
         mealsRecyclerPlan = view.findViewById(R.id.mealsRecyclerPlan);
         dayAdapter = new DayMealAdapter(view.getContext(), this);
         mealsRecyclerPlan.setAdapter(dayAdapter);
