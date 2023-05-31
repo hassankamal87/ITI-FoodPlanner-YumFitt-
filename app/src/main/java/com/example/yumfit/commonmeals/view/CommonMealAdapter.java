@@ -42,14 +42,14 @@ public class CommonMealAdapter extends RecyclerView.Adapter<CommonMealAdapter.Me
         holder.saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onCommonClickInterface.onSaveBtnClicked(myList.get(position));
+                onCommonClickInterface.onSaveBtnClicked(myList.get(holder.getAdapterPosition()));
             }
         });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onCommonClickInterface.onMealItemClicked(myList.get(position).getIdMeal());
+                onCommonClickInterface.onMealItemClicked(myList.get(holder.getAdapterPosition()).getIdMeal());
             }
         });
 

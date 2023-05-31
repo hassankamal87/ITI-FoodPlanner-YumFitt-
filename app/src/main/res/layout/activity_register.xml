@@ -12,9 +12,8 @@
         style="@style/myButton"
         android:layout_width="273dp"
         android:layout_height="55dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="#D3CCCC"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/white"
         android:elevation="40dp"
         android:text="@string/signwithmail"
         android:textColor="#090909"
@@ -23,40 +22,39 @@
         app:icon="@drawable/ic_baseline_mail_24"
         app:iconTint="#0E0E0E"
         app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <Button
-        android:id="@+id/faceBookBtn"
-        style="@style/myButton"
-        android:layout_width="171dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="24dp"
-        android:backgroundTint="#013B93"
-        android:elevation="40dp"
-        android:text="@string/facebook"
-        android:textSize="14sp"
-        app:icon="@drawable/facebook"
-        app:iconSize="30dp"
-        app:iconTint="#F8F5F5"
-        app:layout_constraintStart_toEndOf="@+id/googleBtn"
-        app:layout_constraintTop_toTopOf="@+id/googleBtn" />
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="425dp"
+        android:layout_height="384dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guestImageView"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/ho" />
 
     <Button
         android:id="@+id/googleBtn"
         style="@style/myButton"
-        android:layout_width="171dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="#D3CCCC"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/white"
         android:elevation="40dp"
         android:text="@string/google"
         android:textColor="#070707"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:icon="@drawable/google"
+        app:iconPadding="0dp"
         app:iconSize="30dp"
-        app:iconTint="@color/black"
+        app:iconTintMode="multiply"
         app:layout_constraintBottom_toTopOf="@+id/emailBtn"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/emailBtn"
+        app:layout_constraintStart_toStartOf="@+id/emailBtn" />
 
     <TextView
         android:id="@+id/textView"
@@ -90,5 +88,32 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.94" />
+
+    <ImageView
+        android:id="@+id/guestImageView"
+        android:layout_width="55dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:clickable="true"
+        android:contentDescription="@string/guest"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/workspace" />
+
+
+    <TextView
+        android:id="@+id/guestTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/guest"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/guestImageView"
+        app:layout_constraintTop_toBottomOf="@id/guestImageView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

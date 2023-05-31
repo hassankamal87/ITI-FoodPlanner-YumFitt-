@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_commonMeals"
             app:destination="@id/commonMeals" />
+        <action
+            android:id="@+id/action_homeFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -54,6 +57,7 @@
         android:name="com.example.yumfit.details.view.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" >
+
         <argument
             android:name="id"
             app:argType="string" />

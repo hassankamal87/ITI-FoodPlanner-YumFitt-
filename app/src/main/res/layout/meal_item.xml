@@ -31,7 +31,7 @@
         <TextView
             android:id="@+id/mealName"
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:maxLines="2"
@@ -42,7 +42,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/addToFavouriteBtn"
             app:layout_constraintTop_toBottomOf="@+id/mealImg"
-
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="25dp"
             />
 
         <ImageView

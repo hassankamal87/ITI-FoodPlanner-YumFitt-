@@ -45,14 +45,14 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
         holder.saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickFavouriteInterface.onDeleteBtnClicked(myList.get(position));
+                onClickFavouriteInterface.onDeleteBtnClicked(myList.get(holder.getAdapterPosition()));
             }
         });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickFavouriteInterface.onFavItemClicked(myList.get(position).getIdMeal());
+                onClickFavouriteInterface.onFavItemClicked(myList.get(holder.getAdapterPosition()).getIdMeal());
             }
         });
     }

@@ -1,5 +1,7 @@
 package com.example.yumfit.plan.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,12 +15,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.yumfit.R;
+import com.example.yumfit.authentication.register.RegisterActivity;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class MealPlanFragment extends Fragment implements OnPlanClickInterface {
 
     RecyclerView planRecyclerView;
     PlanRecyclerAdapter planAdapter;
+
+    FirebaseUser currentUser;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +43,22 @@ public class MealPlanFragment extends Fragment implements OnPlanClickInterface {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initializeViews(view);
+
+
+    }
+
+    private void initializeViews(View view) {
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
         planRecyclerView = view.findViewById(R.id.planRecyclerView);
         planAdapter = new PlanRecyclerAdapter(this);
         planRecyclerView.setAdapter(planAdapter);
-        planAdapter.setList();
+
+        if (currentUser != null) {
+            planAdapter.setList();
+        } else {
+            showMaterialDialog(view.getContext());
+        }
     }
 
     @Override
@@ -46,5 +67,23 @@ public class MealPlanFragment extends Fragment implements OnPlanClickInterface {
         MealPlanFragmentDirections.ActionMealPlanFragmentToDayDetailFragment action =
                 MealPlanFragmentDirections.actionMealPlanFragmentToDayDetailFragment(day);
         Navigation.findNavController(getView()).navigate(action);
+    }
+
+    private void showMaterialDialog(Context context) {
+
+        new MaterialAlertDialogBuilder(context)
+                .setTitle(getResources().getString(R.string.yumfit))
+                .setMessage(getResources().getString(R.string.messagePlan))
+                .setNegativeButton(getResources().getString(R.string.signIn), (dialog, which) -> {
+
+                    Intent intent = new Intent();
+                    intent.setClass(getContext(), RegisterActivity.class);
+                    startActivity(intent);
+                })
+                .setPositiveButton(getResources().getString(R.string.cancel), (dialog, which) -> {
+
+
+                })
+                .show();
     }
 }

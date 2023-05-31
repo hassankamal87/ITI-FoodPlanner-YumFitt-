@@ -15,4 +15,6 @@ public interface HomePresenterInterface {
     void insertAllFav(List<Meal> meals);
     void getMealsByCategory(String category);
     void getMealsByCountry(String country);
+
+    void deleteAllFavMeals();
 }

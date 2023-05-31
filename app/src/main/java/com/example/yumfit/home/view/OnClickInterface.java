@@ -7,7 +7,7 @@ import com.example.yumfit.pojo.Meal;
 public interface OnClickInterface {
     void onSaveBtnClick(Meal meal);
 
-    void onDailyInspirationItemClicked(Meal meal);
+    void onDailyInspirationItemClicked(String id);
 
     void onCountryItemClicked(Country country);
 

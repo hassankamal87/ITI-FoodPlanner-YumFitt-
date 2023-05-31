@@ -2,6 +2,7 @@ package com.example.yumfit.profile.view;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -40,6 +41,7 @@ import com.example.yumfit.profile.presenter.ProfilePresenter;
 import com.example.yumfit.profile.presenter.ProfilePresenterInterface;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -52,7 +54,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class ProfileFragment extends Fragment implements ProfileViewInterface{
+public class ProfileFragment extends Fragment implements ProfileViewInterface {
 
     Button logoutBtn;
     ImageView personalImage;
@@ -62,7 +64,6 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface{
     FirebaseUser currentUser;
     FirebaseFirestore db;
     List<Meal> favMeals;
-
 
 
     @Override
@@ -89,16 +90,12 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface{
         profilePresenter = new ProfilePresenter(repo, this);
         profilePresenter.getAllFavouriteMeals();
 
-        nameTextView.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-        emailTextView.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-        Glide.with(getContext()).load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl())
-                .apply(new RequestOptions().override(500, 500)
-                        .placeholder(R.drawable.ic_launcher_foreground)
-                        .error(R.drawable.back_register)).into(personalImage);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateUserDataInFireStore();
+                if (currentUser != null) {
+                    updateUserDataInFireStore();
+                }
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent();
                 intent.setClass(view.getContext(), RegisterActivity.class);
@@ -108,13 +105,28 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface{
             }
         });
 
-        personalImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 1);
-            }
-        });
+        if (currentUser != null) {
+            nameTextView.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+            emailTextView.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+            Glide.with(getContext()).load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl())
+                    .apply(new RequestOptions().override(500, 500)
+                            .placeholder(R.drawable.ic_launcher_foreground)
+                            .error(R.drawable.back_register)).into(personalImage);
+
+            personalImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(intent, 1);
+                }
+            });
+        } else {
+            showMaterialDialog(view.getContext());
+            personalImage.setVisibility(View.GONE);
+            nameTextView.setVisibility(View.GONE);
+            emailTextView.setVisibility(View.GONE);
+            logoutBtn.setText("SignIn");
+        }
 
 
     }
@@ -143,9 +155,9 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface{
     }
 
 
-    private void updateUserDataInFireStore(){
+    private void updateUserDataInFireStore() {
         UserPojo updatedUser = new UserPojo(currentUser.getDisplayName(), currentUser.getEmail(),
-                favMeals,convertDrawableImageToString(personalImage.getDrawable()));
+                favMeals, convertDrawableImageToString(personalImage.getDrawable()));
         Map<String, Object> data = new HashMap<>();
         data.put("userPojo", updatedUser);
         db.collection("users")
@@ -171,7 +183,7 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface{
         this.favMeals = favMeals;
     }
 
-    private String convertDrawableImageToString(Drawable drawableImg){
+    private String convertDrawableImageToString(Drawable drawableImg) {
         // Get the image from the ImageView as a Bitmap object
         Bitmap bitmap = ((BitmapDrawable) drawableImg).getBitmap();
 
@@ -183,5 +195,23 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface{
         // Encode the byte array as a Base64 string
         String photoString = Base64.encodeToString(byteArray, Base64.DEFAULT);
         return photoString;
+    }
+
+    private void showMaterialDialog(Context context) {
+
+        new MaterialAlertDialogBuilder(context)
+                .setTitle(getResources().getString(R.string.yumfit))
+                .setMessage(getResources().getString(R.string.messagePlan))
+                .setNegativeButton(getResources().getString(R.string.signIn), (dialog, which) -> {
+
+                    Intent intent = new Intent();
+                    intent.setClass(getContext(), RegisterActivity.class);
+                    startActivity(intent);
+                })
+                .setPositiveButton(getResources().getString(R.string.cancel), (dialog, which) -> {
+
+
+                })
+                .show();
     }
 }

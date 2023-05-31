@@ -1,5 +1,8 @@
 package com.example.yumfit.daydetail.view;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.yumfit.R;
 import com.example.yumfit.daydetail.presenter.DayDetailsPresenter;
@@ -93,14 +97,25 @@ public class DayDetailFragment extends Fragment implements DayViewInterface, OnD
 
     @Override
     public void onFavItemClicked(String id) {
-        DayDetailFragmentDirections.ActionDayDetailFragmentToDetailsFragment action =
-                DayDetailFragmentDirections.actionDayDetailFragmentToDetailsFragment(id);
-        Navigation.findNavController(getView()).navigate(action);
+        if (checkConnection()) {
+            DayDetailFragmentDirections.ActionDayDetailFragmentToDetailsFragment action =
+                    DayDetailFragmentDirections.actionDayDetailFragmentToDetailsFragment(id);
+            Navigation.findNavController(getView()).navigate(action);
+        }else{
+            Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ((Home2Activity) requireActivity()).bottomNavigationView.setVisibility(View.VISIBLE);
+    }
+
+    private boolean checkConnection() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
+        boolean isConnected = networkCapabilities != null && networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
+        return isConnected;
     }
 }

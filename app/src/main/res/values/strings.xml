@@ -64,6 +64,12 @@
     <string name="yor_plan">Your Plan</string>
     <string name="saturday">Saturday</string>
     <string name="add_to_calender">ADD TO CALENDER</string>
+    <string name="guest">Guest</string>
+    <string name="cancel">Cancel</string>
+    <string name="messageAdd">You need to Sign in to add meals to Favorite</string>
+    <string name="messageFav">You need to Sign in to Show Your Favorite Meals</string>
+    <string name="messagePlan">You need to Sign in to Show Your Plan</string>
+    <string name="addToFav">Add To Favourite</string>
 
     <string-array name="flags">
         <item>https://www.worldometers.info/img/flags/us-flag.gif</item>

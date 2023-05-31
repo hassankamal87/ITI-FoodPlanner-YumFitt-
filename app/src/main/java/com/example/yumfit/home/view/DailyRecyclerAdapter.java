@@ -42,14 +42,14 @@ public class DailyRecyclerAdapter extends RecyclerView.Adapter<DailyRecyclerAdap
         holder.saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickInterface.onSaveBtnClick(myList.get(position));
+                onClickInterface.onSaveBtnClick(myList.get(holder.getAdapterPosition()));
             }
         });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickInterface.onDailyInspirationItemClicked(myList.get(position));
+                onClickInterface.onDailyInspirationItemClicked(myList.get(holder.getAdapterPosition()).getIdMeal());
             }
         });
 

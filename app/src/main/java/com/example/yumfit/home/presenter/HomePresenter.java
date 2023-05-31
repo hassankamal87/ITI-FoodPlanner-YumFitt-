@@ -52,6 +52,11 @@ public class HomePresenter implements NetworkDelegate, HomePresenterInterface {
     }
 
     @Override
+    public void deleteAllFavMeals() {
+        repo.deleteAllFavouriteMeals();
+    }
+
+    @Override
     public void insertMeal(Meal meal) {
         repo.insertMealToFavourite(meal);
     }
@@ -60,6 +65,8 @@ public class HomePresenter implements NetworkDelegate, HomePresenterInterface {
     public void insertAllFav(List<Meal> meals) {
         repo.insertAllFav(meals);
     }
+
+
 
 
     //Delegate

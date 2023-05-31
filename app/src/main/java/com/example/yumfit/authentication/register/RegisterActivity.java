@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.yumfit.R;
@@ -30,8 +32,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    Button gmailBtn, faceBookBtn, signUpEmailBtn;
-    TextView logInTV;
+    Button gmailBtn,  signUpEmailBtn;
+    TextView logInTV, guestTextView;
+    ImageView guestImageView;
     Intent intent;
 
     private GoogleSignInClient client;
@@ -52,14 +55,19 @@ public class RegisterActivity extends AppCompatActivity {
         client = GoogleSignIn.getClient(this, options);
         mAuth = FirebaseAuth.getInstance();
 
+        guestImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.setClass(RegisterActivity.this, Home2Activity.class);
+                startActivity(intent);
+            }
+        });
+
         gmailBtn.setOnClickListener(v -> {
             Intent signInIntent = client.getSignInIntent();
             startActivityForResult(signInIntent, 9001);
         });
 
-        faceBookBtn.setOnClickListener(v -> {
-
-        });
 
         signUpEmailBtn.setOnClickListener(v -> {
             intent.setClass(RegisterActivity.this, SignupActivity.class);
@@ -72,15 +80,17 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
 
+
     }
 
     private void initialiseViews() {
         gmailBtn = findViewById(R.id.googleBtn);
-        faceBookBtn = findViewById(R.id.faceBookBtn);
         signUpEmailBtn = findViewById(R.id.emailBtn);
         logInTV = findViewById(R.id.logInTV);
         logInTV.setPaintFlags(logInTV.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-
+        guestImageView = findViewById(R.id.guestImageView);
+        guestTextView = findViewById(R.id.guestTV);
+        guestTextView.setPaintFlags(guestTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 
     @Override

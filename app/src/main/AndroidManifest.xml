@@ -13,10 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.YumFit"
-        android:screenOrientation="portrait"
         tools:targetApi="31" >
         <activity
             android:name=".ui.Home2Activity"
+            android:screenOrientation="portrait"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
@@ -24,6 +24,7 @@
         </activity>
         <activity
             android:name=".authentication.resetpassword.PasswordReset"
+            android:screenOrientation="portrait"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
@@ -31,6 +32,7 @@
         </activity>
         <activity
             android:name=".authentication.signin.SignInActivity"
+            android:screenOrientation="portrait"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
@@ -38,6 +40,7 @@
         </activity>
         <activity
             android:name=".authentication.signup.SignupActivity"
+            android:screenOrientation="portrait"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
@@ -46,6 +49,7 @@
         <activity
             android:name=".authentication.register.RegisterActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Material3.Light.NoActionBar" >
             <meta-data
                 android:name="android.app.lib_name"
@@ -54,6 +58,7 @@
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Material3.Light.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -92,6 +92,12 @@ public class UserPojo {
         this.userImage = userImage;
     }
 
+    public UserPojo(String displayName, String email, List<Meal> mealsFromRoom) {
+        this.name = displayName;
+        this.email = email;
+        this.favMeals = mealsFromRoom;
+    }
+
     public String getName() {
         return name;
     }

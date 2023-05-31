@@ -1,5 +1,9 @@
 package com.example.yumfit.home.view;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,11 +17,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.yumfit.R;
+import com.example.yumfit.authentication.register.RegisterActivity;
 import com.example.yumfit.db.ConcreteLocalSource;
 import com.example.yumfit.db.LocalSource;
 import com.example.yumfit.home.presenter.HomePresenter;
@@ -26,7 +31,6 @@ import com.example.yumfit.network.ClientService;
 import com.example.yumfit.network.RemoteSource;
 import com.example.yumfit.pojo.Category;
 import com.example.yumfit.pojo.Country;
-import com.example.yumfit.pojo.Ingredient;
 import com.example.yumfit.pojo.Meal;
 import com.example.yumfit.pojo.MealResponse;
 import com.example.yumfit.pojo.Repo;
@@ -36,9 +40,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -56,6 +60,8 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
     HomePresenterInterface presenter;
     DailyRecyclerAdapter dailyAdapter;
     CountryRecyclerAdapter countryAdapter;
+    TextView dailyTV, countryTV, categoryTV;
+    LottieAnimationView loadingLottie;
     CategoryRecyclerAdapter categoryAdapter;
     FirebaseFirestore db;
     boolean isExist = false;
@@ -81,12 +87,11 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
 
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeViews(view);
-
-        checkDataInFireStore();
 
         RemoteSource remoteSource = ClientService.getInstance(view.getContext());
         LocalSource localSource = ConcreteLocalSource.getInstance(view.getContext());
@@ -97,6 +102,12 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
         presenter.getAllCountries();
         presenter.getAllCategories();
 
+        //get database From fireStore
+        if (currentUser != null) {
+            checkDataInFireStore();
+        }else{
+            presenter.deleteAllFavMeals();
+        }
     }
 
     private void initializeViews(View view) {
@@ -104,6 +115,10 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
         dailyRecyclerView = view.findViewById(R.id.dailyInspirationRecycler);
         countryRecyclerView = view.findViewById(R.id.countriesRecyclerView);
         categoryRecyclerView = view.findViewById(R.id.categoriesRecyclerView);
+        dailyTV = view.findViewById(R.id.dailyTV);
+        countryTV = view.findViewById(R.id.countriesTextView);
+        categoryTV = view.findViewById(R.id.categoriesTextView);
+        loadingLottie = view.findViewById(R.id.loadingLottie);
         dailyAdapter = new DailyRecyclerAdapter(view.getContext(), this);
         countryAdapter = new CountryRecyclerAdapter(view.getContext(), this);
         categoryAdapter = new CategoryRecyclerAdapter(view.getContext(), this);
@@ -119,16 +134,19 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
 
         db = FirebaseFirestore.getInstance();
         userPojo = new UserPojo();
+
     }
 
     @Override
     public void setDailyInspirationData(List<Meal> meals) {
+        loadingLottie.setVisibility(View.GONE);
         dailyAdapter.setList((ArrayList<Meal>) meals);
         dailyAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void setListToCategoriesAdapter(List<Category> categories) {
+        loadingLottie.setVisibility(View.GONE);
         categoryAdapter.setList((ArrayList<Category>) categories);
         categoryAdapter.notifyDataSetChanged();
     }
@@ -142,17 +160,23 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
     @Override
     public void onFailureResult(String message) {
         Toast.makeText(dailyRecyclerView.getContext(), "error while : " + message, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void onSaveBtnClick(Meal meal) {
-        presenter.insertMeal(meal);
+        if (currentUser != null) {
+            presenter.insertMeal(meal);
+        } else {
+            showMaterialDialog(getContext());
+        }
     }
 
     @Override
-    public void onDailyInspirationItemClicked(Meal meal) {
+    public void onDailyInspirationItemClicked(String id) {
+        hideAnimation();
         HomeViewFragmentDirections.ActionHomeFragmentToDetailsFragment action =
-                HomeViewFragmentDirections.actionHomeFragmentToDetailsFragment(meal.getIdMeal());
+                HomeViewFragmentDirections.actionHomeFragmentToDetailsFragment(id);
         Navigation.findNavController(getView()).navigate(action);
     }
 
@@ -164,6 +188,7 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
 
     @Override
     public void onSuccessToFilter(MealResponse meals) {
+        hideAnimation();
         HomeViewFragmentDirections.ActionHomeFragmentToCommonMeals action =
                 HomeViewFragmentDirections.actionHomeFragmentToCommonMeals(meals);
         Navigation.findNavController(getView()).navigate(action);
@@ -171,9 +196,36 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
 
     @Override
     public void onCategoryItemClicked(Category category) {
+        hideAnimation();
         presenter.getMealsByCategory(category.getStrCategory());
     }
 
+
+    private void checkDataInFireStore2() {
+        db.collection("users")
+                .document(currentUser.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            Map<String, Object> data = document.getData();
+                            userPojo = document.toObject(UserPojo.class);
+                            if (!document.exists()) {
+                                createNewUserInFireStore();
+                            }
+                            if (userPojo.getFavMeals() != null)
+                                presenter.insertAllFav(userPojo.getFavMeals());
+                            isExist = true;
+                        } else {
+                            Log.d("hey", "Error getting documents.", task.getException());
+
+                        }
+                    }
+                });
+
+    }
 
     private void checkDataInFireStore() {
         db.collection("users")
@@ -224,4 +276,28 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
                 });
     }
 
+    private void showMaterialDialog(Context context) {
+
+        new MaterialAlertDialogBuilder(context)
+                .setTitle(getResources().getString(R.string.yumfit))
+                .setMessage(getResources().getString(R.string.messageAdd))
+                .setNegativeButton(getResources().getString(R.string.signIn), (dialog, which) -> {
+
+                    Intent intent = new Intent();
+                    intent.setClass(getContext(), RegisterActivity.class);
+                    startActivity(intent);
+                })
+                .setPositiveButton(getResources().getString(R.string.cancel), (dialog, which) -> {
+
+                    // Respond to negative button press
+                })
+        .show();
+    }
+
+    private void hideAnimation(){
+        loadingLottie.setVisibility(View.GONE);
+        dailyTV.setVisibility(View.VISIBLE);
+        countryTV.setVisibility(View.VISIBLE);
+        categoryTV.setVisibility(View.VISIBLE);
+    }
 }

@@ -20,13 +20,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:src="@drawable/back_register"
-            android:scaleType="centerCrop"
-            />
+            android:scaleType="centerCrop"/>
+
+        <Button
+            android:id="@+id/addToYourCalender"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:backgroundTint="@color/white"
+            android:contentDescription="@string/addToFav"
+            android:elevation="25dp"
+            app:icon="@drawable/calender_white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/detailsCardView"
             android:layout_width="0dp"
-            android:layout_height="170dp"
+            android:layout_height="180dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detailsImageView"
@@ -34,6 +48,7 @@
             app:elevationOverlayEnabled="true"
             app:cardCornerRadius="30dp"
             app:cardElevation="30dp"
+            android:padding="10dp"
             android:layout_margin="10dp"
             >
 
@@ -45,64 +60,68 @@
                     android:id="@+id/detailsRecipeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="@string/recipe"
-                    android:textSize="14sp"
                     android:layout_marginTop="10dp"
+                    android:text="@string/recipe"
                     android:textColor="@color/text_grey"
-                    />
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/detailsMealNameTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/detailsRecipeTextView"
                     android:text="@string/nameofMeal"
-                    android:textSize="28sp"
                     android:textColor="@color/black"
+                    android:textSize="28sp"
                     android:textStyle="bold"
-                    />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/detailsRecipeTextView" />
 
                 <TextView
                     android:id="@+id/detailsCountryName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/detailsMealNameTextView"
-                    app:layout_constraintTop_toBottomOf="@id/detailsMealNameTextView"
-                    app:layout_constraintEnd_toEndOf="@id/detailsMealNameTextView"
                     android:layout_marginTop="5dp"
                     android:text="@string/china"
-                    android:textSize="20sp"
                     android:textColor="@color/text_grey"
-                    />
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="@id/detailsMealNameTextView"
+                    app:layout_constraintStart_toStartOf="@id/detailsMealNameTextView"
+                    app:layout_constraintTop_toBottomOf="@id/detailsMealNameTextView" />
 
                 <Button
                     android:id="@+id/detailsAddToPlanBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="50dp"
-                    app:layout_constraintTop_toBottomOf="@id/detailsCountryName"
-                    android:backgroundTint="@color/black"
                     android:layout_marginTop="10dp"
+                    android:backgroundTint="@color/black"
+                    android:paddingHorizontal="20dp"
                     android:text="@string/add_to_plan"
-                    />
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toStartOf="@+id/detailsAddToFav"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/detailsCountryName" />
+
+
                 <Button
-                    android:id="@+id/addToYourCalender"
+                    android:id="@+id/detailsAddToFav"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/detailsAddToPlanBtn"
-                    app:layout_constraintTop_toBottomOf="@id/detailsCountryName"
-                    android:backgroundTint="@color/text_grey"
-                    android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/black"
-                    android:text="@string/add_to_calender"
-                    />
+                    android:backgroundTint="@color/black"
+                    android:paddingHorizontal="20dp"
+                    android:text="@string/addToFav"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/detailsAddToPlanBtn"
+                    app:layout_constraintTop_toBottomOf="@id/detailsCountryName" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
