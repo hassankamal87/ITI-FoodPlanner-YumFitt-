@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.yumfit.pojo.Meal;
 
-@Database(entities = Meal.class, version = 1)
+@Database(entities = Meal.class, version = 2)
 public abstract class MealsDatabase extends RoomDatabase {
     private static MealsDatabase instance;
     public abstract MealsDao getMealsDao();
