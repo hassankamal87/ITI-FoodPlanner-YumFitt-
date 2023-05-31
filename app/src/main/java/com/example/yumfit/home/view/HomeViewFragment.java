@@ -18,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.yumfit.R;
@@ -159,7 +158,7 @@ public class HomeViewFragment extends Fragment implements HomeViewInterface, OnC
 
     @Override
     public void onFailureResult(String message) {
-        Toast.makeText(dailyRecyclerView.getContext(), "error while : " + message, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(dailyRecyclerView.getContext(), "error while : " + message, Toast.LENGTH_SHORT).show();
 
     }
 
