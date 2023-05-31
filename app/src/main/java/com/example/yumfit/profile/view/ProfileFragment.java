@@ -110,8 +110,8 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface {
             emailTextView.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
             Glide.with(getContext()).load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl())
                     .apply(new RequestOptions().override(500, 500)
-                            .placeholder(R.drawable.ic_launcher_foreground)
-                            .error(R.drawable.back_register)).into(personalImage);
+                            .placeholder(R.drawable.man)
+                            .error(R.drawable.man)).into(personalImage);
 
             personalImage.setOnClickListener(new View.OnClickListener() {
                 @Override

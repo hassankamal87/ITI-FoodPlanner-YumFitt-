@@ -56,7 +56,6 @@ public class SignupActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(SignupActivity.this, "Authentication Successful", Toast.LENGTH_SHORT).show();
                                     intent.setClass(SignupActivity.this, Home2Activity.class);
                                     mAuth.getCurrentUser().updateProfile(new UserProfileChangeRequest.Builder().setDisplayName(name).build());
                                     startActivity(intent);

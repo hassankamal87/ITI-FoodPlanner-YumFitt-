@@ -37,7 +37,7 @@ public class IngredientRecyclerAdapter extends RecyclerView.Adapter<IngredientRe
         holder.measureTV.setText(myList.get(position).getIngredientMeasure());
         Glide.with(context).load(myList.get(position).getIngredientThumb())
                 .apply(new RequestOptions().override(500, 500)
-                        .placeholder(R.drawable.ic_launcher_foreground)
+                        .placeholder(R.drawable.loading)
                         .error(com.google.firebase.appcheck.interop.R.drawable.googleg_standard_color_18)).into(holder.ingredientImg);
 
 

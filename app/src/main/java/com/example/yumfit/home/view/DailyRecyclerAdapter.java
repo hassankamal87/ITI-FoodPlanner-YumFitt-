@@ -55,7 +55,7 @@ public class DailyRecyclerAdapter extends RecyclerView.Adapter<DailyRecyclerAdap
 
         Glide.with(context).load(myList.get(position).getStrMealThumb())
                 .apply(new RequestOptions().override(500,500)
-                        .placeholder(R.drawable.ic_launcher_foreground)
+                        .placeholder(R.drawable.loading)
                         .error(R.drawable.back_register)).into(holder.mealImg);
 
     }

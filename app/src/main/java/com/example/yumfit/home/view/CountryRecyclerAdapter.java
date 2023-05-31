@@ -43,7 +43,7 @@ public class CountryRecyclerAdapter extends RecyclerView.Adapter<CountryRecycler
 
             Glide.with(context).load(flags[position])
                     .apply(new RequestOptions().override(500, 500)
-                            .placeholder(R.drawable.ic_launcher_foreground)
+                            .placeholder(R.drawable.loading)
                             .error(R.drawable.back_register)).into(holder.countryImg);
             holder.countryName.setText(myList.get(position).getStrArea());
 

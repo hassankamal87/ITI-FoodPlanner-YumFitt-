@@ -189,7 +189,7 @@ public class DetailsFragment extends Fragment implements DetailsViewInterface {
         currentMeal = meals.get(0);
         Glide.with(getContext()).load(meals.get(0).getStrMealThumb())
                 .apply(new RequestOptions().override(500, 500)
-                        .placeholder(R.drawable.ic_launcher_foreground)
+                        .placeholder(R.drawable.loading)
                         .error(R.drawable.back_register)).into(mealImg);
         mealNameTV.setText(meals.get(0).getStrMeal());
         mealCountryTV.setText(meals.get(0).getStrArea());

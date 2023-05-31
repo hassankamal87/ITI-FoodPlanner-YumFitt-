@@ -64,6 +64,9 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         gmailBtn.setOnClickListener(v -> {
+            client.signOut().addOnCompleteListener(task -> {
+                startActivityForResult(client.getSignInIntent(), 9001);
+            });
             Intent signInIntent = client.getSignInIntent();
             startActivityForResult(signInIntent, 9001);
         });

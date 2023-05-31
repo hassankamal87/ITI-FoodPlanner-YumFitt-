@@ -15,7 +15,6 @@ import com.example.yumfit.authentication.register.RegisterActivity;
 public class MainActivity extends AppCompatActivity {
 
     TextView appNameTextView;
-    ImageView logoIV;
     Animation scaleChanger;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +22,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         appNameTextView = findViewById(R.id.appNameTextView);
-        logoIV = findViewById(R.id.logoImageView);
 
         scaleChanger = AnimationUtils.loadAnimation(this, R.anim.scale_changer);
 
-        logoIV.startAnimation(scaleChanger);
         appNameTextView.startAnimation(scaleChanger);
         
         appNameTextView.postOnAnimationDelayed(new Runnable() {

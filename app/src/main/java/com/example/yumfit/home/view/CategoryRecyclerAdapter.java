@@ -37,7 +37,7 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         Glide.with(context).load(myList.get(position).getStrCategoryThumb())
                 .apply(new RequestOptions().override(500,500)
-                        .placeholder(R.drawable.ic_launcher_foreground)
+                        .placeholder(R.drawable.loading)
                         .error(R.drawable.back_register)).into(holder.categoryImage);
         holder.categoryName.setText(myList.get(position).getStrCategory());
 
