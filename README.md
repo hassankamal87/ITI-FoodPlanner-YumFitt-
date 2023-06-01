@@ -12,6 +12,7 @@ YumFit is a food planner app that allows users to plan their meals for the week 
 The app uses various third-party libraries and features to provide a seamless user experience.
 
 # Used Tools
+- **MVP**:Architecture Pattern.
 - **Room**: Used for local data storage and management.
 - **Retrofit**: Used for network requests and API integration.
 - **Glide**: Used for image loading and caching.
